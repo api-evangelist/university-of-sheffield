@@ -1,0 +1,52 @@
+---
+# Spectral ruleset encoding patterns observed in the figshare API
+# powering the University of Sheffield ORDA research data repository.
+formats:
+  - oas3
+rules:
+  uos-info-title:
+    description: API must declare a title.
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+  uos-info-description:
+    description: API should provide a description.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  uos-server-figshare:
+    description: Server URL should target the figshare v2 API base used by ORDA.
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.figshare\\.com/v2"
+  uos-operation-tags:
+    description: Every operation should be tagged so research-data endpoints stay grouped.
+    severity: warn
+    given: $.paths[*][get,post,put,delete]
+    then:
+      field: tags
+      function: truthy
+  uos-article-id-integer:
+    description: Article identifiers are integers across the figshare API.
+    severity: warn
+    given: $.components.schemas.Article.properties.id
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: "^integer$"
+  uos-doi-present:
+    description: Research output objects should expose a DOI for citation.
+    severity: warn
+    given: $.components.schemas.Article.properties
+    then:
+      field: doi
+      function: truthy

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/main/json-structure/university-of-sheffield-article-structure.json",
+  "name": "Article",
+  "description": "JSON Structure for a figshare article as exposed by the University of Sheffield ORDA research data repository via the public figshare API.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Unique identifier for article" },
+    "title": { "type": "string", "description": "Title of article" },
+    "doi": { "type": "string", "description": "DOI" },
+    "handle": { "type": "string", "description": "Handle" },
+    "url": { "type": "string", "description": "Api endpoint for article" },
+    "url_public_html": { "type": "string", "description": "Public site endpoint for article" },
+    "url_public_api": { "type": "string", "description": "Public Api endpoint for article" },
+    "url_private_html": { "type": "string", "description": "Private site endpoint for article" },
+    "url_private_api": { "type": "string", "description": "Private Api endpoint for article" },
+    "timeline": {
+      "type": "object",
+      "description": "Timeline of article publishing dates",
+      "properties": {
+        "firstOnline": { "type": "string" },
+        "publisherPublication": { "type": "string" },
+        "publisherAcceptance": { "type": "string" },
+        "posted": { "type": "string" },
+        "revision": { "type": "string" }
+      }
+    },
+    "thumb": { "type": "string", "description": "Thumbnail image" },
+    "defined_type": { "type": "int32", "description": "Type of article identifier" },
+    "defined_type_name": { "type": "string", "description": "Name of the article type identifier" },
+    "resource_doi": { "type": "string", "description": "Publisher article DOI" },
+    "resource_title": { "type": "string", "description": "Publisher article title" },
+    "created_date": { "type": "string", "description": "Date when article was created" }
+  },
+  "required": [
+    "id",
+    "title",
+    "doi",
+    "handle",
+    "url",
+    "timeline",
+    "defined_type",
+    "defined_type_name",
+    "created_date"
+  ]
+}

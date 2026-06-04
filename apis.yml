@@ -49,6 +49,26 @@ apis:
         url: https://docs.figshare.com/
       - type: Portal
         url: https://orda.shef.ac.uk/
+      - type: OpenAPI
+        url: openapi/university-of-sheffield-orda.yaml
+      - type: JSONSchema
+        url: json-schema/university-of-sheffield-article-schema.json
+      - type: JSONSchema
+        url: json-schema/university-of-sheffield-author-schema.json
+      - type: JSONSchema
+        url: json-schema/university-of-sheffield-file-schema.json
+      - type: JSONStructure
+        url: json-structure/university-of-sheffield-article-structure.json
+      - type: Example
+        url: examples/university-of-sheffield-list-articles-example.json
+      - type: Example
+        url: examples/university-of-sheffield-get-article-example.json
+      - type: Rules
+        url: rules/university-of-sheffield-rules.yml
+      - type: Vocabulary
+        url: vocabulary/university-of-sheffield-vocabulary.yml
+      - type: JSONLD
+        url: json-ld/university-of-sheffield-context.jsonld
   - aid: university-of-sheffield:wrro-oai
     name: White Rose Research Online OAI-PMH
     description: >-

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/main/json-schema/university-of-sheffield-article-schema.json",
+  "title": "Article",
+  "description": "A figshare article (dataset, paper, media or other research output) as returned by the public figshare API used by the University of Sheffield ORDA repository.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "doi",
+    "handle",
+    "url",
+    "url_public_html",
+    "url_public_api",
+    "url_private_html",
+    "url_private_api",
+    "timeline",
+    "thumb",
+    "defined_type",
+    "defined_type_name",
+    "resource_doi",
+    "resource_title",
+    "created_date"
+  ],
+  "properties": {
+    "id": { "type": "integer", "description": "Unique identifier for article" },
+    "title": { "type": "string", "description": "Title of article" },
+    "doi": { "type": "string", "description": "DOI" },
+    "handle": { "type": "string", "description": "Handle" },
+    "url": { "type": "string", "format": "uri", "description": "Api endpoint for article" },
+    "url_public_html": { "type": "string", "format": "uri", "description": "Public site endpoint for article" },
+    "url_public_api": { "type": "string", "format": "uri", "description": "Public Api endpoint for article" },
+    "url_private_html": { "type": "string", "format": "uri", "description": "Private site endpoint for article" },
+    "url_private_api": { "type": "string", "format": "uri", "description": "Private Api endpoint for article" },
+    "timeline": {
+      "type": "object",
+      "description": "Timeline of article publishing dates",
+      "properties": {
+        "firstOnline": { "type": "string", "description": "First online date" },
+        "publisherPublication": { "type": "string", "description": "Publisher publication date" },
+        "publisherAcceptance": { "type": "string", "description": "Publisher acceptance date" },
+        "posted": { "type": "string", "description": "Posted date" },
+        "revision": { "type": "string", "description": "Revision date" }
+      }
+    },
+    "thumb": { "type": "string", "format": "uri", "description": "Thumbnail image" },
+    "defined_type": { "type": "integer", "description": "Type of article identifier" },
+    "defined_type_name": { "type": "string", "description": "Name of the article type identifier" },
+    "resource_doi": { "type": "string", "description": "Publisher article DOI (deprecated by related materials)" },
+    "resource_title": { "type": "string", "description": "Publisher article title (deprecated by related materials)" },
+    "created_date": { "type": "string", "format": "date-time", "description": "Date when article was created" }
+  }
+}

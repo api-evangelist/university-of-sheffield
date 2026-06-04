@@ -1,0 +1,55 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.figshare.com/v2/articles/1434614",
+    "description": "Retrieve a single public figshare article including its authors and files."
+  },
+  "response": {
+    "id": 1434614,
+    "title": "Sample research dataset",
+    "doi": "10.6084/m9.figshare.1434614",
+    "handle": "111184/figshare.1234",
+    "url": "https://api.figshare.com/v2/articles/1434614",
+    "url_public_html": "https://orda.shef.ac.uk/articles/dataset/Sample_research_dataset/1434614",
+    "url_public_api": "https://api.figshare.com/v2/articles/1434614",
+    "url_private_html": "https://figshare.com/account/articles/1434614",
+    "url_private_api": "https://api.figshare.com/v2/account/articles/1434614",
+    "figshare_url": "https://orda.shef.ac.uk/articles/dataset/Sample_research_dataset/1434614",
+    "download_disabled": false,
+    "defined_type": 3,
+    "defined_type_name": "dataset",
+    "resource_doi": "",
+    "resource_title": "",
+    "created_date": "2017-05-18T11:49:03Z",
+    "timeline": {
+      "posted": "2017-05-18T11:49:03",
+      "firstOnline": "2017-05-18T11:49:03"
+    },
+    "thumb": "https://ndownloader.figshare.com/files/123456789/preview/12345678/thumb.png",
+    "authors": [
+      {
+        "id": 97657,
+        "full_name": "Jane Doe",
+        "first_name": "Jane",
+        "last_name": "Doe",
+        "is_active": true,
+        "url_name": "Jane_Doe",
+        "orcid_id": "0000-0002-1825-0097"
+      }
+    ],
+    "files": [
+      {
+        "id": 3000002,
+        "name": "dataset.csv",
+        "size": 14848,
+        "is_link_only": false,
+        "download_url": "https://ndownloader.figshare.com/files/3000002",
+        "supplied_md5": "043a51806d646e88cafbf19e7b82846f",
+        "computed_md5": "043a51806d646e88cafbf19e7b82846f",
+        "mimetype": "text/csv"
+      }
+    ],
+    "custom_fields": [],
+    "embargo_options": []
+  }
+}

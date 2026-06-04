@@ -1,0 +1,53 @@
+---
+vocabulary:
+  name: University of Sheffield Research Data API Vocabulary
+  description: >-
+    Controlled terms describing the objects and concepts exposed by the
+    University of Sheffield ORDA research data repository through the public
+    figshare REST API, alongside the OAI-PMH harvesting interfaces of the
+    White Rose shared repositories.
+  version: "1.0.0"
+  terms:
+    - term: Article
+      definition: >-
+        A figshare item representing a research output such as a dataset,
+        paper, media, software or thesis, identified by an integer id and a DOI.
+      tags: [ figshare, research-output, core-object ]
+    - term: Author
+      definition: >-
+        A contributor associated with an article, optionally carrying an
+        ORCID identifier.
+      tags: [ figshare, person, attribution ]
+    - term: PublicFile
+      definition: >-
+        A downloadable file attached to a public article, including size,
+        MIME type and md5 checksums.
+      tags: [ figshare, file, download ]
+    - term: Collection
+      definition: >-
+        A curated grouping of figshare articles published with its own DOI.
+      tags: [ figshare, aggregation ]
+    - term: Category
+      definition: >-
+        A taxonomy classification assigned to an article within figshare's
+        subject taxonomy.
+      tags: [ figshare, taxonomy, classification ]
+    - term: DOI
+      definition: >-
+        Digital Object Identifier minted for an article or collection enabling
+        persistent citation of the research output.
+      tags: [ identifier, citation, persistence ]
+    - term: ORCID
+      definition: >-
+        Open Researcher and Contributor ID used to disambiguate authors.
+      tags: [ identifier, person ]
+    - term: OAI-PMH
+      definition: >-
+        Open Archives Initiative Protocol for Metadata Harvesting, exposed by
+        ORDA and the White Rose EPrints repositories for bulk metadata harvest.
+      tags: [ protocol, harvesting, metadata ]
+    - term: Timeline
+      definition: >-
+        Set of lifecycle dates for an article such as posted, first-online and
+        publisher publication dates.
+      tags: [ figshare, dates, lifecycle ]

@@ -1,0 +1,58 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "uos": "https://www.sheffield.ac.uk/ns#",
+    "figshare": "https://api.figshare.com/v2/ns#",
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+    "Institution": {
+      "@id": "schema:CollegeOrUniversity",
+      "@context": {
+        "name": "schema:name",
+        "url": "schema:url"
+      }
+    },
+    "Article": {
+      "@id": "schema:Dataset",
+      "@context": {
+        "id": "schema:identifier",
+        "title": "schema:name",
+        "doi": "schema:identifier",
+        "handle": "schema:identifier",
+        "url": { "@id": "schema:url", "@type": "@id" },
+        "url_public_html": { "@id": "schema:url", "@type": "@id" },
+        "thumb": { "@id": "schema:image", "@type": "@id" },
+        "created_date": { "@id": "schema:dateCreated", "@type": "schema:DateTime" },
+        "defined_type_name": "schema:additionalType",
+        "authors": "schema:author",
+        "files": "schema:distribution",
+        "timeline": "uos:timeline"
+      }
+    },
+    "Author": {
+      "@id": "schema:Person",
+      "@context": {
+        "id": "schema:identifier",
+        "full_name": "schema:name",
+        "first_name": "schema:givenName",
+        "last_name": "schema:familyName",
+        "orcid_id": { "@id": "schema:identifier", "@type": "@id" }
+      }
+    },
+    "PublicFile": {
+      "@id": "schema:DataDownload",
+      "@context": {
+        "id": "schema:identifier",
+        "name": "schema:name",
+        "size": "schema:contentSize",
+        "download_url": { "@id": "schema:contentUrl", "@type": "@id" },
+        "mimetype": "schema:encodingFormat"
+      }
+    }
+  },
+  "@type": "Institution",
+  "name": "University of Sheffield",
+  "url": "https://www.sheffield.ac.uk/"
+}

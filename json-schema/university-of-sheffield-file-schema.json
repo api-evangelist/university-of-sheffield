@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/main/json-schema/university-of-sheffield-file-schema.json",
+  "title": "PublicFile",
+  "description": "A public file attached to a figshare article as returned by the public figshare API used by the University of Sheffield ORDA repository.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "size",
+    "is_link_only",
+    "download_url",
+    "supplied_md5",
+    "computed_md5"
+  ],
+  "properties": {
+    "id": { "type": "integer", "description": "File id" },
+    "name": { "type": "string", "description": "File name" },
+    "size": { "type": "integer", "description": "File size in bytes" },
+    "is_link_only": { "type": "boolean", "description": "True if file is hosted somewhere else" },
+    "download_url": { "type": "string", "format": "uri", "description": "Url for file download" },
+    "supplied_md5": { "type": "string", "description": "File supplied md5" },
+    "computed_md5": { "type": "string", "description": "File computed md5" },
+    "mimetype": { "type": "string", "description": "MIME Type of the file" }
+  }
+}
