@@ -1,0 +1,104 @@
+---
+aid: university-of-sheffield
+name: University of Sheffield
+description: >-
+  The University of Sheffield is a public research university in Sheffield,
+  United Kingdom, ranked #105 in the QS World University Rankings 2025. Its
+  public developer and API footprint is centered on open research
+  infrastructure rather than a single unified developer portal: research data
+  is published through ORDA (the institution's figshare-backed research data
+  repository, which exposes the standard figshare REST API and an OAI-PMH
+  endpoint), and research outputs and theses are deposited in the
+  White Rose Research Online (EPrints) and White Rose eTheses Online shared
+  repositories, both of which expose OAI-PMH harvesting interfaces. The
+  University also maintains public GitHub organizations for IT Services and
+  research software engineering. No general-purpose, self-service developer
+  portal for course, timetable, or student-information APIs was found publicly
+  documented.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research Data
+  - Open Access
+  - OAI-PMH
+  - United Kingdom
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: university-of-sheffield:orda
+    name: ORDA Research Data Repository (figshare API)
+    description: >-
+      ORDA is the University of Sheffield's online research data catalogue and
+      repository, hosted on the figshare platform. Public datasets, their
+      metadata and DOIs are accessible programmatically through the standard
+      figshare REST API (api.figshare.com/v2) and through an OAI-PMH endpoint at
+      orda.shef.ac.uk/oai. The API and platform are operated by figshare, not by
+      a Sheffield-specific developer portal.
+    humanURL: https://orda.shef.ac.uk/
+    baseURL: https://api.figshare.com/v2
+    tags: [ Research Data, Repository, figshare, OAI-PMH, Open Access ]
+    properties:
+      - type: Documentation
+        url: https://docs.figshare.com/
+      - type: Portal
+        url: https://orda.shef.ac.uk/
+  - aid: university-of-sheffield:wrro-oai
+    name: White Rose Research Online OAI-PMH
+    description: >-
+      White Rose Research Online (WRRO) is the shared open-access research
+      repository for the Universities of Leeds, Sheffield and York, running on
+      EPrints. It exposes an OAI-PMH interface for harvesting metadata of
+      University of Sheffield research outputs including articles, chapters and
+      conference papers.
+    humanURL: https://eprints.whiterose.ac.uk/
+    baseURL: https://eprints.whiterose.ac.uk/cgi/oai2
+    tags: [ Repository, OAI-PMH, EPrints, Open Access, Research Outputs ]
+    properties:
+      - type: Documentation
+        url: https://eprints.whiterose.ac.uk/information.html
+      - type: Portal
+        url: https://eprints.whiterose.ac.uk/
+  - aid: university-of-sheffield:wreo-oai
+    name: White Rose eTheses Online OAI-PMH
+    description: >-
+      White Rose eTheses Online (WREO) is the shared electronic theses
+      repository for the Universities of Leeds, Sheffield and York, running on
+      EPrints. It exposes an OAI-PMH interface for harvesting University of
+      Sheffield thesis metadata.
+    humanURL: https://etheses.whiterose.ac.uk/
+    baseURL: https://etheses.whiterose.ac.uk/cgi/oai2
+    tags: [ Repository, OAI-PMH, EPrints, Theses, Open Access ]
+    properties:
+      - type: Documentation
+        url: https://etheses.whiterose.ac.uk/
+      - type: Portal
+        url: https://etheses.whiterose.ac.uk/
+common:
+  - type: Website
+    url: https://www.sheffield.ac.uk/
+  - type: GitHub
+    url: https://github.com/SheffieldUni
+  - type: SourceCode
+    url: https://github.com/rcgsheffield
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/university-of-sheffield/
+  - type: Twitter
+    url: https://twitter.com/sheffielduni
+  - type: Plans
+    url: plans/university-of-sheffield-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/university-of-sheffield-rate-limits.yml
+  - type: FinOps
+    url: finops/university-of-sheffield-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

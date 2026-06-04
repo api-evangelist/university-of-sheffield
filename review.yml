@@ -1,0 +1,50 @@
+---
+name: University of Sheffield
+description: University of Sheffield public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 2
+    summary: >-
+      Verified live: the ORDA research data repository (orda.shef.ac.uk) and its
+      OAI-PMH endpoint, the figshare REST API used by ORDA, and both White Rose
+      OAI-PMH endpoints (WRRO and WREO) which correctly Identify as their
+      respective repositories. The official SheffieldUni GitHub organization is
+      live with public IT/integration tooling. No general self-service developer
+      portal or documented course/timetable/student-information APIs were found;
+      most institutional APIs are platform-provided (figshare, EPrints) rather
+      than Sheffield-branded. No endpoints were fabricated; the shibboleth host
+      did not resolve and was excluded.
+    endpoints:
+      - url: https://www.sheffield.ac.uk/
+        status: 200
+        note: Official university website, live.
+      - url: https://orda.shef.ac.uk/
+        status: 202
+        note: ORDA figshare research data repository (Cloudflare 202 challenge response).
+      - url: https://orda.shef.ac.uk/oai?verb=Identify
+        status: 202
+        note: ORDA OAI-PMH endpoint (behind Cloudflare challenge).
+      - url: https://api.figshare.com/v2/articles?page_size=1
+        status: 200
+        note: figshare REST API powering ORDA, responds to public article queries.
+      - url: https://docs.figshare.com/
+        status: 200
+        note: figshare API documentation, live.
+      - url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=Identify
+        status: 200
+        note: White Rose Research Online OAI-PMH; Identify returns repositoryName "White Rose Research Online".
+      - url: https://etheses.whiterose.ac.uk/cgi/oai2?verb=Identify
+        status: 200
+        note: White Rose eTheses Online OAI-PMH; Identify returns repositoryName "White Rose eTheses Online".
+      - url: https://github.com/SheffieldUni
+        status: 200
+        note: Official University of Sheffield GitHub org, ~19 public repos.
+      - url: https://twitter.com/sheffielduni
+        status: 200
+        note: Official X/Twitter account, live.
+      - url: https://www.linkedin.com/school/university-of-sheffield/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn anti-bot response, URL pattern standard.
