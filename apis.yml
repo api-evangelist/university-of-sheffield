@@ -59,9 +59,9 @@ apis:
         url: json-schema/university-of-sheffield-file-schema.json
       - type: JSONStructure
         url: json-structure/university-of-sheffield-article-structure.json
-      - type: Example
+      - type: Examples
         url: examples/university-of-sheffield-list-articles-example.json
-      - type: Example
+      - type: Examples
         url: examples/university-of-sheffield-get-article-example.json
       - type: Rules
         url: rules/university-of-sheffield-rules.yml
