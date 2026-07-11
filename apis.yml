@@ -101,6 +101,10 @@ apis:
       - type: Portal
         url: https://etheses.whiterose.ac.uk/
 common:
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
   - type: Website
     url: https://www.sheffield.ac.uk/
   - type: GitHub
