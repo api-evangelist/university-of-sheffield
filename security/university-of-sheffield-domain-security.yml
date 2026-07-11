@@ -1,0 +1,46 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.sheffield.ac.uk
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec  2 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: orda.shef.ac.uk
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan  5 23:59:59 2027 GMT
+  hsts: false
+- host: api.figshare.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Dec 25 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: sheffield.ac.uk
+  dnssec: false
+  caa:
+  - 0 issue "sectigo.com"
+  - 0 issue "digicert.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issuewild "sectigo.com"
+  - 0 issue "amazon.com"
+  - 0 iodef "mailto:soc@sheffield.ac.uk"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: shef.ac.uk
+  dnssec: false
+  caa:
+  - 0 issue "sectigo.com"
+  - 0 issuewild "letsencrypt.org"
+  - 0 issue "pki.goog"
+  - 0 issuewild "sectigo.com"
+  - 0 iodef "mailto:soc@sheffield.ac.uk"
+  - 0 issue "amazon.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
