@@ -1,0 +1,32 @@
+{
+  "provider": "university-of-sheffield",
+  "sources": [
+    "university-of-sheffield-altmetric-api-openapi.yml",
+    "university-of-sheffield-articles-api-openapi.yml",
+    "university-of-sheffield-authors-api-openapi.yml",
+    "university-of-sheffield-collections-api-openapi.yml",
+    "university-of-sheffield-institutions-api-openapi.yml",
+    "university-of-sheffield-oauth-api-openapi.yml",
+    "university-of-sheffield-other-api-openapi.yml",
+    "university-of-sheffield-profiles-api-openapi.yml",
+    "university-of-sheffield-projects-api-openapi.yml",
+    "university-of-sheffield-symplectic-api-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-sheffield-altmetric-api-openapi.yml",
+    "university-of-sheffield-articles-api-openapi.yml",
+    "university-of-sheffield-authors-api-openapi.yml",
+    "university-of-sheffield-collections-api-openapi.yml",
+    "university-of-sheffield-institutions-api-openapi.yml",
+    "university-of-sheffield-oauth-api-openapi.yml",
+    "university-of-sheffield-other-api-openapi.yml",
+    "university-of-sheffield-profiles-api-openapi.yml",
+    "university-of-sheffield-projects-api-openapi.yml",
+    "university-of-sheffield-symplectic-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
