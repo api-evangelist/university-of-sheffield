@@ -429,6 +429,9 @@ apis:
   - type: JSONLD
     url: json-ld/university-of-sheffield-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/university-of-sheffield-capability-edges.yml
+    name: University of Sheffield Business Capability Map
   - type: AgenticAccess
     url: agentic-access/university-of-sheffield-agentic-access.yml
   - type: DomainSecurity
