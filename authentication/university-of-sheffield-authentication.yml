@@ -1,18 +1,83 @@
-generated: '2026-07-11'
+---
+generated: '2026-08-30'
 method: derived
-source: openapi/university-of-sheffield-orda.yaml
+source: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
+probed:
+  - url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/0
+    status: 200
+    note: keyless
+  - url: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
+    status: 401
+    note: identifier required
+  - url: https://idp.shef.ac.uk/idp/shibboleth
+    status: 200
+    note: institutional SAML 2.0 identity provider metadata
+provider: University of Sheffield
+x-operator: institution
 summary:
   types:
-  - oauth2
-  oauth2_flows:
-  - authorizationCode
+    - oauth2
+    - apiKey
+    - http
+    - saml2
+  public_read_without_credentials: true
 schemes:
-- name: OAuth2
-  type: oauth2
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://figshare.com/account/applications/authorize
-    tokenUrl: https://api.figshare.com/v2/token
-    scopes: 1
-  sources:
-  - openapi/university-of-sheffield-orda.yaml
+  - name: OAuth2PasswordBearer
+    api: Sheffield Solar API
+    type: oauth2
+    flows:
+      - flow: password
+        tokenUrl: https://api.solar.sheffield.ac.uk/auth/jwt/login
+        scopes: 0
+    note: >-
+      Declared in the institution's published OpenAPI with an empty scopes object.
+      Guards the PV_Forecast, /users and /admin operations, not the open PV_Live reads.
+    source: https://api.solar.sheffield.ac.uk/openapi.json
+  - name: APIKeyCookie
+    api: Sheffield Solar API
+    type: apiKey
+    in: cookie
+    parameter: ssapi_session
+    note: Browser session cookie for the Sheffield Solar web UI.
+    source: https://api.solar.sheffield.ac.uk/openapi.json
+  - name: HTTPBasic
+    api: Sheffield Solar API
+    type: http
+    scheme: basic
+    source: https://api.solar.sheffield.ac.uk/openapi.json
+  - name: X-User-Id
+    api: Sheffield Solar API
+    type: apiKey
+    in: header
+    parameter: X-User-Id
+    note: >-
+      NOT declared in the published OpenAPI. Enforced at runtime on PV_Forecast
+      endpoints and discovered by live probe — a 401 body naming the header.
+      Recorded as an undocumented-but-real access control.
+    method: probed
+    source: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
+  - name: Shibboleth IdP (SAML 2.0)
+    api: Institutional identity federation
+    type: saml2
+    entity_id: https://idp.shef.ac.uk/shibboleth
+    metadata: https://idp.shef.ac.uk/idp/shibboleth
+    bindings:
+      - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST
+      - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign
+      - urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect
+      - urn:oasis:names:tc:SAML:2.0:bindings:SOAP
+    note: >-
+      Institution-operated Shibboleth identity provider. This is how a University
+      of Sheffield affiliate authenticates into every vendor-tenanted service the
+      institution buys, and it is the one access surface here that is unambiguously
+      the institution's own engineering.
+    method: probed
+    source: https://idp.shef.ac.uk/idp/shibboleth
+notes: >-
+  The University of Sheffield operates no central API gateway, no developer-key
+  issuance and no self-service developer portal. Access is either fully open
+  (PV_Live), gated by a per-service registration (PV_Forecast), or gated by
+  institutional SSO through the Shibboleth IdP.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,53 +1,86 @@
 ---
+generated: '2026-08-30'
+method: derived
+source: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
 vocabulary:
-  name: University of Sheffield Research Data API Vocabulary
+  name: University of Sheffield Programmable Surface Vocabulary
   description: >-
-    Controlled terms describing the objects and concepts exposed by the
-    University of Sheffield ORDA research data repository through the public
-    figshare REST API, alongside the OAI-PMH harvesting interfaces of the
-    White Rose shared repositories.
-  version: "1.0.0"
+    Controlled terms for the surfaces the University of Sheffield actually operates
+    or tenants. Two families: the domain terms of the institution's own Sheffield
+    Solar API, and the operator/repository terms needed to read this profile
+    correctly. Terms describing a vendor's product are marked as such.
+  version: '2.0.0'
+  x-operator-note: >-
+    Version 1.0.0 of this file described figshare's object model and was removed on
+    2026-08-30 as vendor-attributed. The institution does not define Article,
+    Collection or Project — figshare does.
   terms:
-    - term: Article
+    - term: PV_Live
       definition: >-
-        A figshare item representing a research output such as a dataset,
-        paper, media, software or thesis, identified by an integer id and a DOI.
-      tags: [ figshare, research-output, core-object ]
-    - term: Author
+        Sheffield Solar's near-real-time and historical estimate of solar
+        photovoltaic generation on the GB transmission network, published half-hourly.
+      x-operator: institution
+      tags: [ solar, energy, core-product ]
+    - term: PV_Live_EU
       definition: >-
-        A contributor associated with an article, optionally carrying an
-        ORCID identifier.
-      tags: [ figshare, person, attribution ]
-    - term: PublicFile
+        The PV_Live estimation method applied to European NUTS statistical regions.
+      x-operator: institution
+      tags: [ solar, energy, europe ]
+    - term: PV_Forecast
       definition: >-
-        A downloadable file attached to a public article, including size,
-        MIME type and md5 checksums.
-      tags: [ figshare, file, download ]
-    - term: Collection
+        Sheffield Solar's day-ahead forecast of GB solar PV generation. Access
+        requires a registered user identifier.
+      x-operator: institution
+      tags: [ solar, energy, forecast, gated ]
+    - term: GSP
       definition: >-
-        A curated grouping of figshare articles published with its own DOI.
-      tags: [ figshare, aggregation ]
-    - term: Category
+        Grid Supply Point — the National Grid transmission-to-distribution
+        interface used as the spatial unit for PV_Live estimates. GSP id 0 is the
+        GB national aggregate.
+      x-operator: institution
+      tags: [ geography, electricity, identifier ]
+    - term: PES
       definition: >-
-        A taxonomy classification assigned to an article within figshare's
-        subject taxonomy.
-      tags: [ figshare, taxonomy, classification ]
-    - term: DOI
+        Public Electricity Supplier region — the fourteen historical GB
+        distribution regions used as a coarser spatial unit. PES id 0 is national.
+      x-operator: institution
+      tags: [ geography, electricity, identifier ]
+    - term: generation_mw
+      definition: Estimated solar PV output in megawatts for a half-hourly settlement period.
+      x-operator: institution
+      tags: [ measure, electricity ]
+    - term: tabular envelope
       definition: >-
-        Digital Object Identifier minted for an article or collection enabling
-        persistent citation of the research output.
-      tags: [ identifier, citation, persistence ]
-    - term: ORCID
+        The response shape every Sheffield Solar data endpoint uses — a `meta` array
+        naming columns and a `data` array of positional rows, rather than named objects.
+      x-operator: institution
+      tags: [ response-shape, convention ]
+    - term: ORDA
       definition: >-
-        Open Researcher and Contributor ID used to disambiguate authors.
-      tags: [ identifier, person ]
-    - term: OAI-PMH
+        The Online Research Data repository of the University of Sheffield. Sheffield's
+        data and DOIs, running on figshare's platform at orda.shef.ac.uk. The
+        deployment is the institution's; the API contract is figshare's.
+      x-operator: tenant
+      tags: [ repository, research-data, figshare ]
+    - term: WRRO
       definition: >-
-        Open Archives Initiative Protocol for Metadata Harvesting, exposed by
-        ORDA and the White Rose EPrints repositories for bulk metadata harvest.
-      tags: [ protocol, harvesting, metadata ]
-    - term: Timeline
+        White Rose Research Online — the open-access outputs repository shared by the
+        Universities of Leeds, Sheffield and York, running on EPrints. Consortium-operated.
+      x-operator: tenant
+      tags: [ repository, open-access, eprints, consortium ]
+    - term: WREO
       definition: >-
-        Set of lifecycle dates for an article such as posted, first-online and
-        publisher publication dates.
-      tags: [ figshare, dates, lifecycle ]
+        White Rose eTheses Online — the shared electronic theses repository of the same
+        three universities, running on EPrints.
+      x-operator: tenant
+      tags: [ repository, theses, eprints, consortium ]
+    - term: Shibboleth IdP
+      definition: >-
+        The institution's own SAML 2.0 identity provider at entityID
+        https://idp.shef.ac.uk/shibboleth. The authentication surface through which
+        Sheffield affiliates reach every tenanted service the institution buys.
+      x-operator: institution
+      tags: [ identity, saml, federation ]
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

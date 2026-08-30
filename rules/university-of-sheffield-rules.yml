@@ -1,6 +1,13 @@
+# x-method: derived
+# source: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
+# generated: 2026-08-30
+#
+# Spectral ruleset encoding the conventions actually observed in the University
+# of Sheffield's own Sheffield Solar API, plus the two contract gaps that API
+# Evangelist measured in it (no servers block, placeholder info.version).
+# Measured, not aspirational: every rule below is either satisfied by the
+# institution's published document or names a gap this profile recorded.
 ---
-# Spectral ruleset encoding patterns observed in the figshare API
-# powering the University of Sheffield ORDA research data repository.
 formats:
   - oas3
 rules:
@@ -12,41 +19,78 @@ rules:
       field: title
       function: truthy
   uos-info-description:
-    description: API should provide a description.
+    description: >-
+      API should describe itself. The institution's published document does not —
+      the description in this repo's refined copy was added by API Evangelist from
+      the provider's own public docs and is marked as such.
     severity: warn
     given: $.info
     then:
       field: description
       function: truthy
-  uos-server-figshare:
-    description: Server URL should target the figshare v2 API base used by ORDA.
+  uos-info-contact:
+    description: API should name a contact. Absent from the published source document.
     severity: warn
-    given: $.servers[*]
+    given: $.info
     then:
-      field: url
+      field: contact
+      function: truthy
+  uos-servers-declared:
+    description: >-
+      A contract must say where it is callable. The published source document ships
+      no servers block; the host was recovered by probe.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+  uos-version-not-placeholder:
+    description: >-
+      info.version must not be the framework default 0.1.0 — the observed value.
+      Path-level versions (v4, v5) carry the real version signal instead.
+    severity: warn
+    given: $.info.version
+    then:
       function: pattern
       functionOptions:
-        match: "^https://api\\.figshare\\.com/v2"
-  uos-operation-tags:
-    description: Every operation should be tagged so research-data endpoints stay grouped.
+        notMatch: '^0\.1\.0$'
+  uos-operation-tagged:
+    description: >-
+      Every operation should carry a tag. Observed 43 paths, of which the /user/*
+      HTML form routes are untagged.
     severity: warn
-    given: $.paths[*][get,post,put,delete]
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: tags
       function: truthy
-  uos-article-id-integer:
-    description: Article identifiers are integers across the figshare API.
-    severity: warn
-    given: $.components.schemas.Article.properties.id
+  uos-operation-id:
+    description: Every operation should carry an operationId. Satisfied throughout.
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
     then:
-      field: type
+      field: operationId
+      function: truthy
+  uos-operation-summary:
+    description: Every operation should carry a summary. Satisfied throughout.
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+  uos-path-lowercase:
+    description: Path segments are lower_snake_case throughout this API.
+    severity: warn
+    given: $.paths[*]~
+    then:
       function: pattern
       functionOptions:
-        match: "^integer$"
-  uos-doi-present:
-    description: Research output objects should expose a DOI for citation.
+        match: '^[a-z0-9_{}/\-]+$'
+  uos-security-schemes-declared:
+    description: >-
+      Declared security schemes must exist. Note that the runtime X-User-Id header
+      enforced on PV_Forecast is NOT among them — see authentication/.
     severity: warn
-    given: $.components.schemas.Article.properties
+    given: $.components
     then:
-      field: doi
+      field: securitySchemes
       function: truthy

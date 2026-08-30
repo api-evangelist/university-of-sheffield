@@ -1,12 +1,19 @@
 {
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "openapi/university-of-sheffield-sheffield-solar-api-openapi.yml",
+    "note": "Replaces a 2026-06-03 context derived from figshare's object model, which was vendor-attributed and removed."
+  },
   "@context": {
     "@version": 1.1,
     "schema": "https://schema.org/",
-    "uos": "https://www.sheffield.ac.uk/ns#",
-    "figshare": "https://api.figshare.com/v2/ns#",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "uos": "https://api.solar.sheffield.ac.uk/ns#",
     "name": "schema:name",
     "url": "schema:url",
     "description": "schema:description",
+    "identifier": "schema:identifier",
     "Institution": {
       "@id": "schema:CollegeOrUniversity",
       "@context": {
@@ -14,45 +21,39 @@
         "url": "schema:url"
       }
     },
-    "Article": {
+    "SolarGenerationDataset": {
       "@id": "schema:Dataset",
       "@context": {
-        "id": "schema:identifier",
-        "title": "schema:name",
-        "doi": "schema:identifier",
-        "handle": "schema:identifier",
-        "url": { "@id": "schema:url", "@type": "@id" },
-        "url_public_html": { "@id": "schema:url", "@type": "@id" },
-        "thumb": { "@id": "schema:image", "@type": "@id" },
-        "created_date": { "@id": "schema:dateCreated", "@type": "schema:DateTime" },
-        "defined_type_name": "schema:additionalType",
-        "authors": "schema:author",
-        "files": "schema:distribution",
-        "timeline": "uos:timeline"
+        "variableMeasured": "schema:variableMeasured",
+        "temporalCoverage": "schema:temporalCoverage",
+        "spatialCoverage": "schema:spatialCoverage",
+        "license": "schema:license",
+        "provider": "schema:provider"
       }
     },
-    "Author": {
-      "@id": "schema:Person",
+    "GenerationObservation": {
+      "@id": "sosa:Observation",
       "@context": {
-        "id": "schema:identifier",
-        "full_name": "schema:name",
-        "first_name": "schema:givenName",
-        "last_name": "schema:familyName",
-        "orcid_id": { "@id": "schema:identifier", "@type": "@id" }
+        "datetime_gmt": { "@id": "sosa:resultTime", "@type": "schema:DateTime" },
+        "generation_mw": { "@id": "sosa:hasSimpleResult", "@type": "schema:Number" },
+        "gsp_id": { "@id": "uos:gspId", "@type": "schema:Integer" },
+        "pes_id": { "@id": "uos:pesId", "@type": "schema:Integer" }
       }
     },
-    "PublicFile": {
-      "@id": "schema:DataDownload",
+    "GridSupplyPoint": {
+      "@id": "schema:Place",
       "@context": {
-        "id": "schema:identifier",
-        "name": "schema:name",
-        "size": "schema:contentSize",
-        "download_url": { "@id": "schema:contentUrl", "@type": "@id" },
-        "mimetype": "schema:encodingFormat"
+        "gsp_id": { "@id": "uos:gspId", "@type": "schema:Integer" },
+        "gsp_name": "schema:name"
+      }
+    },
+    "PublicElectricitySupplierRegion": {
+      "@id": "schema:Place",
+      "@context": {
+        "pes_id": { "@id": "uos:pesId", "@type": "schema:Integer" },
+        "pes_name": "schema:alternateName",
+        "pes_longname": "schema:name"
       }
     }
-  },
-  "@type": "Institution",
-  "name": "University of Sheffield",
-  "url": "https://www.sheffield.ac.uk/"
+  }
 }

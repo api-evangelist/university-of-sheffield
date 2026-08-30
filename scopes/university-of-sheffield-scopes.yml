@@ -1,17 +1,35 @@
-generated: '2026-07-11'
+---
+generated: '2026-08-30'
 method: derived
-source: openapi/university-of-sheffield-orda.yaml
+source: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
+provider: University of Sheffield
+x-operator: institution
+description: >-
+  The University of Sheffield's own Sheffield Solar API declares an OAuth2 password
+  flow but publishes an EMPTY scopes object — there is no scope vocabulary to record.
+  Authorization is coarse: an operation is either open, or it requires an
+  authenticated user, or it requires an administrator. This file records that
+  absence rather than inventing scopes to fill it.
 schemes:
-- name: OAuth2
-  source: openapi/university-of-sheffield-orda.yaml
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://figshare.com/account/applications/authorize
-    tokenUrl: https://api.figshare.com/v2/token
-scopes:
-- scope: all
-  description: Grants all access
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/university-of-sheffield-orda.yaml
+  - name: OAuth2PasswordBearer
+    flows:
+      - flow: password
+        tokenUrl: https://api.solar.sheffield.ac.uk/auth/jwt/login
+        scopes_declared: 0
+scopes: []
+coarse_authorization_tiers:
+  - tier: open
+    description: No credential. PV_Live and PV_Live_EU read endpoints, and the gsp/pes/nuts lists.
+    evidence:
+      url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/0
+      status: 200
+  - tier: registered-user
+    description: Requires a registered identifier (X-User-Id header) or a JWT. PV_Forecast endpoints, /users/me.
+    evidence:
+      url: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
+      status: 401
+  - tier: administrator
+    description: The /admin operations, which issue and revoke user tokens.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
