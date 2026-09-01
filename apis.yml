@@ -309,6 +309,9 @@ apis:
       - type: Conformance
         url: conformance/university-of-sheffield-conformance.yml
 common:
+  - type: License
+    name: GPL-3.0
+    url: https://github.com/SheffieldSolar/PV_Live-API/blob/main/LICENSE
   - type: Website
     url: https://www.sheffield.ac.uk/
   - type: APIReference
