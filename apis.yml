@@ -20,7 +20,7 @@ description: >-
   tenant relationships, which they are, and not as Sheffield engineering, which they
   are not.
 type: Index
-position: Producer
+position: Producing
 access: Public
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-sheffield.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/apis.yml
