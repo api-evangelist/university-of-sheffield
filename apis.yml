@@ -129,185 +129,632 @@ x-attribution-correction:
     - Sheffield Solar API
     - University of Sheffield Shibboleth Identity Provider
 apis:
-  - aid: university-of-sheffield:sheffield-solar-api
-    name: Sheffield Solar API
-    x-operator: institution
-    description: >-
-      The University of Sheffield's own research API, built and run by the Sheffield
-      Solar group in the Department of Physics and Astronomy. It publishes PV_Live —
-      near-real-time and historical estimates of solar photovoltaic generation on the
-      GB transmission network, by Grid Supply Point and Public Electricity Supplier
-      region — plus PV_Live_EU over European NUTS regions and PV_Forecast day-ahead
-      forecasts. PV_Live read endpoints are keyless and answered 200 on probe;
-      PV_Forecast returns 401 without a registered X-User-Id header. The institution
-      publishes its own OpenAPI 3.1 document, a Swagger UI and a Redoc rendering. This
-      is the one contract in this repository that Sheffield actually wrote.
-    humanURL: https://www.solar.sheffield.ac.uk/api/
-    baseURL: https://api.solar.sheffield.ac.uk
-    tags:
-      - Solar Energy
-      - Energy Data
-      - Research Data
-      - Open Data
-      - Time Series
-    properties:
-      - type: OpenAPI
-        url: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
-      - type: OpenAPI
-        url: https://api.solar.sheffield.ac.uk/openapi.json
-      - type: Documentation
-        url: https://www.solar.sheffield.ac.uk/api/
-      - type: APIReference
-        url: https://api.solar.sheffield.ac.uk/redoc
-      - type: InteractiveDocumentation
-        url: https://api.solar.sheffield.ac.uk/docs
-      - type: Portal
-        url: https://api.solar.sheffield.ac.uk/pvlive/docs
-      - type: TermsOfService
-        url: https://api.solar.sheffield.ac.uk/tandc
-      - type: Status
-        url: https://api.solar.sheffield.ac.uk/pvlive/uptime
-      - type: Support
-        url: https://api.solar.sheffield.ac.uk/pvlive/contact
-      - type: SourceCode
-        url: https://github.com/SheffieldSolar/PV_Live-API
-      - type: JSONSchema
-        url: json-schema/university-of-sheffield-pvlive-response-schema.json
-      - type: JSONSchema
-        url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
-      - type: Examples
-        url: examples/university-of-sheffield-pvlive-gsp-example.json
-      - type: Examples
-        url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
-      - type: Examples
-        url: examples/university-of-sheffield-pvlive-pes-list-example.json
-      - type: Examples
-        url: examples/university-of-sheffield-pvforecast-auth-required-example.json
-      - type: Rules
-        url: rules/university-of-sheffield-rules.yml
-      - type: Vocabulary
-        url: vocabulary/university-of-sheffield-vocabulary.yml
-      - type: JSONLD
-        url: json-ld/university-of-sheffield-context.jsonld
-      - type: Errors
-        url: errors/university-of-sheffield-errors.yml
-      - type: Lifecycle
-        url: lifecycle/university-of-sheffield-lifecycle.yml
-      - type: Authentication
-        url: authentication/university-of-sheffield-authentication.yml
-      - type: OAuthScopes
-        url: scopes/university-of-sheffield-scopes.yml
-  - aid: university-of-sheffield:shibboleth-idp
-    name: University of Sheffield Shibboleth Identity Provider
-    x-operator: institution
-    description: >-
-      The institution's own SAML 2.0 identity provider, entityID
-      https://idp.shef.ac.uk/shibboleth, serving live Shibboleth metadata from
-      Sheffield's own domain. Machine-readable, institution-operated by definition, and
-      the access path through which Sheffield affiliates reach every vendor-tenanted
-      service the university buys. Declares HTTP-POST, HTTP-POST-SimpleSign,
-      HTTP-Redirect and SOAP bindings for SAML 2.0 SSO and single logout, plus legacy
-      SAML 1.1 endpoints. Verified live 2026-08-30, HTTP 200, application/xml.
-    humanURL: https://www.sheffield.ac.uk/it-services
-    baseURL: https://idp.shef.ac.uk/idp
-    tags:
-      - Identity Federation
-      - SAML
-      - Shibboleth
-      - Single Sign-On
-      - Authentication
-    properties:
-      - type: Metadata
-        url: https://idp.shef.ac.uk/idp/shibboleth
-      - type: Conformance
-        url: conformance/university-of-sheffield-conformance.yml
-      - type: Authentication
-        url: authentication/university-of-sheffield-authentication.yml
-  - aid: university-of-sheffield:orda
-    name: ORDA — Online Research Data (figshare tenant)
-    x-operator: tenant
-    description: >-
-      ORDA is the University of Sheffield's research data repository at
-      orda.shef.ac.uk. The records, the DOIs and the curation are Sheffield's; the
-      platform and the API contract are figshare's. Sheffield is a registered DataCite
-      provider (id ooki) and ORDA is a registered DataCite repository client (id
-      bl.shef), so deposits mint DataCite DOIs. NO SPEC IS SAVED HERE ON PURPOSE — the
-      figshare contract belongs in figshare's own repository, and attributing it to
-      Sheffield is the specific defect this profile was re-run to correct. The relationship
-      is real and is recorded; the engineering is not Sheffield's. ORDA's OAI-PMH endpoint
-      is live but returns a Cloudflare 202 challenge to scripted clients.
-    humanURL: https://orda.shef.ac.uk/
-    baseURL: https://orda.shef.ac.uk/oai
-    tags:
-      - Research Repository
-      - Research Data
-      - OAI-PMH
-      - DataCite
-      - Figshare
-    tags_raw:
-      - Research Repository
-      - Research Data
-      - OAI-PMH
-      - DataCite
-      - figshare
-    properties:
-      - type: Portal
-        url: https://orda.shef.ac.uk/
-      - type: Documentation
-        url: https://www.sheffield.ac.uk/library/rdm/orda
-      - type: VendorProfile
-        url: https://api.datacite.org/clients/bl.shef
-      - type: Conformance
-        url: conformance/university-of-sheffield-conformance.yml
-  - aid: university-of-sheffield:wrro-oai
-    name: White Rose Research Online OAI-PMH
-    x-operator: tenant
-    description: >-
-      White Rose Research Online is the shared open-access outputs repository of the
-      Universities of Leeds, Sheffield and York, running on EPrints and administered by
-      the White Rose consortium rather than by Sheffield alone. Its OAI-PMH 2.0
-      interface Identifies as "White Rose Research Online" and offers thirteen metadata
-      formats including oai_dc, rioxx, oai_openaire, uketd_dc and oai_dc_orcid — the
-      last of which is where this profile's ORCID conformance evidence comes from.
-      Sheffield co-owns the deployment; EPrints wrote the protocol implementation.
-    humanURL: https://eprints.whiterose.ac.uk/
-    baseURL: https://eprints.whiterose.ac.uk/cgi/oai2
-    tags:
-      - Research Repository
-      - OAI-PMH
-      - EPrints
-      - Open Access
-      - ORCID
-      - Consortium
-    properties:
-      - type: Documentation
-        url: https://eprints.whiterose.ac.uk/information.html
-      - type: Portal
-        url: https://eprints.whiterose.ac.uk/
-      - type: Conformance
-        url: conformance/university-of-sheffield-conformance.yml
-  - aid: university-of-sheffield:wreo-oai
-    name: White Rose eTheses Online OAI-PMH
-    x-operator: tenant
-    description: >-
-      White Rose eTheses Online is the shared electronic theses repository of the same
-      three universities, running on EPrints. Its OAI-PMH 2.0 interface Identifies as
-      "White Rose eTheses Online" and harvests University of Sheffield thesis metadata.
-      Consortium-operated on a vendor platform; recorded as a tenant relationship.
-    humanURL: https://etheses.whiterose.ac.uk/
-    baseURL: https://etheses.whiterose.ac.uk/cgi/oai2
-    tags:
-      - Research Repository
-      - OAI-PMH
-      - EPrints
-      - Theses
-      - Open Access
-      - Consortium
-    properties:
-      - type: Portal
-        url: https://etheses.whiterose.ac.uk/
-      - type: Conformance
-        url: conformance/university-of-sheffield-conformance.yml
+- aid: university-of-sheffield:shibboleth-idp
+  name: University of Sheffield Shibboleth Identity Provider
+  x-operator: institution
+  description: >-
+    The institution's own SAML 2.0 identity provider, entityID https://idp.shef.ac.uk/shibboleth, serving
+    live Shibboleth metadata from Sheffield's own domain. Machine-readable, institution-operated by definition,
+    and the access path through which Sheffield affiliates reach every vendor-tenanted service the university
+    buys. Declares HTTP-POST, HTTP-POST-SimpleSign, HTTP-Redirect and SOAP bindings for SAML 2.0 SSO and
+    single logout, plus legacy SAML 1.1 endpoints. Verified live 2026-08-30, HTTP 200, application/xml.
+  humanURL: https://www.sheffield.ac.uk/it-services
+  baseURL: https://idp.shef.ac.uk/idp
+  tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - Single Sign-On
+  - Authentication
+  properties:
+  - type: Metadata
+    url: https://idp.shef.ac.uk/idp/shibboleth
+  - type: Conformance
+    url: conformance/university-of-sheffield-conformance.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+- aid: university-of-sheffield:orda
+  name: ORDA — Online Research Data (figshare tenant)
+  x-operator: tenant
+  description: >-
+    ORDA is the University of Sheffield's research data repository at orda.shef.ac.uk. The records, the
+    DOIs and the curation are Sheffield's; the platform and the API contract are figshare's. Sheffield
+    is a registered DataCite provider (id ooki) and ORDA is a registered DataCite repository client (id
+    bl.shef), so deposits mint DataCite DOIs. NO SPEC IS SAVED HERE ON PURPOSE — the figshare contract
+    belongs in figshare's own repository, and attributing it to Sheffield is the specific defect this
+    profile was re-run to correct. The relationship is real and is recorded; the engineering is not Sheffield's.
+    ORDA's OAI-PMH endpoint is live but returns a Cloudflare 202 challenge to scripted clients.
+  humanURL: https://orda.shef.ac.uk/
+  baseURL: https://orda.shef.ac.uk/oai
+  tags:
+  - Research Repository
+  - Research Data
+  - OAI-PMH
+  - DataCite
+  - Figshare
+  tags_raw:
+  - Research Repository
+  - Research Data
+  - OAI-PMH
+  - DataCite
+  - figshare
+  properties:
+  - type: Portal
+    url: https://orda.shef.ac.uk/
+  - type: Documentation
+    url: https://www.sheffield.ac.uk/library/rdm/orda
+  - type: VendorProfile
+    url: https://api.datacite.org/clients/bl.shef
+  - type: Conformance
+    url: conformance/university-of-sheffield-conformance.yml
+- aid: university-of-sheffield:wrro-oai
+  name: White Rose Research Online OAI-PMH
+  x-operator: tenant
+  description: >-
+    White Rose Research Online is the shared open-access outputs repository of the Universities of Leeds,
+    Sheffield and York, running on EPrints and administered by the White Rose consortium rather than by
+    Sheffield alone. Its OAI-PMH 2.0 interface Identifies as "White Rose Research Online" and offers thirteen
+    metadata formats including oai_dc, rioxx, oai_openaire, uketd_dc and oai_dc_orcid — the last of which
+    is where this profile's ORCID conformance evidence comes from. Sheffield co-owns the deployment; EPrints
+    wrote the protocol implementation.
+  humanURL: https://eprints.whiterose.ac.uk/
+  baseURL: https://eprints.whiterose.ac.uk/cgi/oai2
+  tags:
+  - Research Repository
+  - OAI-PMH
+  - EPrints
+  - Open Access
+  - ORCID
+  - Consortium
+  properties:
+  - type: Documentation
+    url: https://eprints.whiterose.ac.uk/information.html
+  - type: Portal
+    url: https://eprints.whiterose.ac.uk/
+  - type: Conformance
+    url: conformance/university-of-sheffield-conformance.yml
+- aid: university-of-sheffield:wreo-oai
+  name: White Rose eTheses Online OAI-PMH
+  x-operator: tenant
+  description: >-
+    White Rose eTheses Online is the shared electronic theses repository of the same three universities,
+    running on EPrints. Its OAI-PMH 2.0 interface Identifies as "White Rose eTheses Online" and harvests
+    University of Sheffield thesis metadata. Consortium-operated on a vendor platform; recorded as a tenant
+    relationship.
+  humanURL: https://etheses.whiterose.ac.uk/
+  baseURL: https://etheses.whiterose.ac.uk/cgi/oai2
+  tags:
+  - Research Repository
+  - OAI-PMH
+  - EPrints
+  - Theses
+  - Open Access
+  - Consortium
+  properties:
+  - type: Portal
+    url: https://etheses.whiterose.ac.uk/
+  - type: Conformance
+    url: conformance/university-of-sheffield-conformance.yml
+- aid: university-of-sheffield:university-of-sheffield-admin-api
+  name: University of Sheffield Admin API
+  description: The admin API from University of Sheffield — 7 operation(s) for admin.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - admin
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-admin-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-api-auth-api
+  name: University of Sheffield API Auth API
+  description: The api-auth API from University of Sheffield — 3 operation(s) for api-auth.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - api-auth
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-api-auth-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-auth-api
+  name: University of Sheffield Auth API
+  description: The auth API from University of Sheffield — 6 operation(s) for auth.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - auth
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-auth-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-health-api
+  name: University of Sheffield Health API
+  description: The health API from University of Sheffield — 2 operation(s) for health.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-health-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-metrics-api
+  name: University of Sheffield Metrics API
+  description: The metrics API from University of Sheffield — 1 operation(s) for metrics.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-pvforecast-api
+  name: University of Sheffield Pvforecast API
+  description: PV_Forecast API endpoints.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - pvforecast
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-pvforecast-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-pvlive-api
+  name: University of Sheffield Pvlive API
+  description: PV_Live API endpoints.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - pvlive
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-pvlive-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-pvlive-eu-api
+  name: University of Sheffield Pvlive Eu API
+  description: PV_Live EU API endpoints.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - pvlive_eu
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-pvlive-eu-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-user-api
+  name: University of Sheffield User API
+  description: The User API from University of Sheffield — 7 operation(s) for user.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-user-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
+- aid: university-of-sheffield:university-of-sheffield-users-api
+  name: University of Sheffield Users API
+  description: The users API from University of Sheffield — 2 operation(s) for users.
+  humanURL: https://www.solar.sheffield.ac.uk/api/
+  baseURL: https://api.solar.sheffield.ac.uk
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-sheffield-users-api-openapi.yml
+  - type: Documentation
+    url: https://www.solar.sheffield.ac.uk/api/
+  - type: APIReference
+    url: https://api.solar.sheffield.ac.uk/redoc
+  - type: InteractiveDocumentation
+    url: https://api.solar.sheffield.ac.uk/docs
+  - type: Portal
+    url: https://api.solar.sheffield.ac.uk/pvlive/docs
+  - type: TermsOfService
+    url: https://api.solar.sheffield.ac.uk/tandc
+  - type: Status
+    url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  - type: Support
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+  - type: SourceCode
+    url: https://github.com/SheffieldSolar/PV_Live-API
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-response-schema.json
+  - type: JSONSchema
+    url: json-schema/university-of-sheffield-pvlive-generation-row-schema.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-gsp-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-peakgeneration-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvlive-pes-list-example.json
+  - type: Examples
+    url: examples/university-of-sheffield-pvforecast-auth-required-example.json
+  - type: Rules
+    url: rules/university-of-sheffield-rules.yml
+  - type: Vocabulary
+    url: vocabulary/university-of-sheffield-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/university-of-sheffield-context.jsonld
+  - type: Errors
+    url: errors/university-of-sheffield-errors.yml
+  - type: Lifecycle
+    url: lifecycle/university-of-sheffield-lifecycle.yml
+  - type: Authentication
+    url: authentication/university-of-sheffield-authentication.yml
+  - type: OAuthScopes
+    url: scopes/university-of-sheffield-scopes.yml
 common:
   - type: License
     name: GPL-3.0
