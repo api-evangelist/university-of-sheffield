@@ -144,6 +144,12 @@ apis:
   - Identity Federation
   - SAML
   - Shibboleth
+  - SSO
+  - Authentication
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - Shibboleth
   - Single Sign-On
   - Authentication
   properties:
@@ -241,6 +247,8 @@ apis:
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -293,6 +301,8 @@ apis:
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
   tags:
+  - API Auth
+  tags_raw:
   - api-auth
   properties:
   - type: OpenAPI
@@ -345,6 +355,8 @@ apis:
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -397,6 +409,8 @@ apis:
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -449,6 +463,8 @@ apis:
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
   tags:
+  - Metrics
+  tags_raw:
   - metrics
   properties:
   - type: OpenAPI
@@ -604,7 +620,8 @@ apis:
   description: PV_Live EU API endpoints.
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
-  tags:
+  tags: []
+  tags_raw:
   - pvlive_eu
   properties:
   - type: OpenAPI
@@ -709,6 +726,8 @@ apis:
   humanURL: https://www.solar.sheffield.ac.uk/api/
   baseURL: https://api.solar.sheffield.ac.uk
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
