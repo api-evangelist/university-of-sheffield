@@ -4,19 +4,19 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Sheffield
 providerId: university-of-sheffield
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
 - Higher Education
 - University
 - Rate Limiting
-description: >-
-  University of Sheffield does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+description: The University of Sheffield publishes no rate-limit table for any of its surfaces. The Sheffield
+  Solar API returned no RateLimit-* or X-RateLimit-* headers on probe (2026-08-30) and its published OpenAPI
+  declares no 429 response. The OAI-PMH endpoints on the White Rose repositories may throttle large harvests;
+  ORDA sits behind Cloudflare, which will challenge or throttle automated clients irrespective of any
+  Sheffield policy. Harvest politely, honour Retry-After, and contact the relevant service for bulk access.
+notes: No published global limit. Per-service limits are undocumented; confirm with each service.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/apis.yml
 responseCodes:
@@ -25,8 +25,8 @@ limits:
 - name: Default
   scope: client
   metric: requests-per-minute
-  limit: see service documentation
-  notes: No published global limit; large harvests may be rate-limited.
+  limit: not published
+  notes: No RateLimit headers observed on api.solar.sheffield.ac.uk; no 429 declared in the contract.
 policies:
 - name: Backoff Strategy
   description: Exponential backoff with jitter; honor Retry-After; harvest during off-peak hours.

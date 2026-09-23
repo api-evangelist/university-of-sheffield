@@ -1,0 +1,36 @@
+openapi: 3.2.0
+info:
+  title: Sheffield Solar Metrics API
+  version: 0.1.0
+tags:
+- name: Metrics
+paths:
+  /metrics:
+    get:
+      tags:
+      - Metrics
+      summary: Metrics
+      operationId: metrics_metrics_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBasic: []
+components:
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /auth/jwt/login
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: ssapi_session
+    HTTPBasic:
+      type: http
+      scheme: basic

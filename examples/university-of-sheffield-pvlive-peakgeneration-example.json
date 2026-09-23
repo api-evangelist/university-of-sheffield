@@ -1,0 +1,16 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.solar.sheffield.ac.uk/pvlive/api/v4/peakgeneration",
+  "note": "Captured live from the University of Sheffield's own Sheffield Solar API. Unmodified response body.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.solar.sheffield.ac.uk/pvlive/api/v4/peakgeneration",
+    "auth": "none",
+    "status": 200
+  },
+  "response": {
+    "meta": ["datetime_gmt", "generation_MW"],
+    "data": [["2026-04-23T12:30:00Z", 16393.3]]
+  }
+}

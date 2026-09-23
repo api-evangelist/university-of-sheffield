@@ -1,0 +1,23 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.solar.sheffield.ac.uk/pvlive/api/v4/pes_list",
+  "note": "Captured live from the University of Sheffield's own Sheffield Solar API. Response truncated to the first six rows; shape unmodified.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.solar.sheffield.ac.uk/pvlive/api/v4/pes_list",
+    "auth": "none",
+    "status": 200
+  },
+  "response": {
+    "meta": ["pes_id", "pes_name", "pes_longname"],
+    "data": [
+      [0, "_0", "NATIONAL"],
+      [10, "_A", "UKPN (East)"],
+      [11, "_B", "WPD (East Midlands)"],
+      [12, "_C", "UKPN (London)"],
+      [13, "_D", "SPEN (SP MANWEB)"],
+      [14, "_E", "WPD (Midlands)"]
+    ]
+  }
+}

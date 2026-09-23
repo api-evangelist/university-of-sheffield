@@ -4,7 +4,7 @@ schema: https://www.finops.org/framework/
 provider: University of Sheffield
 providerId: university-of-sheffield
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
@@ -12,12 +12,11 @@ tags:
 - University
 - FinOps
 - FOCUS
-description: >-
-  FinOps profile for University of Sheffield. As a non-commercial higher-education institution, its
-  APIs carry no usage-based billing; there is no invoiced cost to allocate or optimize.
-  FinOps relevance is limited to the institution's own internal cloud/infrastructure
-  cost management, which is not publicly disclosed.
-notes: No public usage-based API billing; University of Sheffield's APIs are free/open or affiliation-gated.
+description: 'FinOps profile for the University of Sheffield. As a public higher-education institution
+  it operates no usage-based API billing: the one API it runs itself (Sheffield Solar) is free and keyless
+  for reads, and every other surface is a bought platform whose cost is a procurement line, not an API
+  charge. There is no invoiced API cost to allocate or optimise.'
+notes: No public usage-based API billing. Sheffield is an API buyer, not an API seller.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/apis.yml
 - https://www.finops.org/framework/

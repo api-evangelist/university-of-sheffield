@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/main/json-schema/university-of-sheffield-pvlive-generation-row-schema.json",
+  "title": "PVLiveGenerationRow",
+  "description": "One PV_Live generation estimate, expressed as the named object a client builds by zipping meta with a data row. Derived from live probed responses of https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/{gsp_id} on 2026-08-30.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "examples/university-of-sheffield-pvlive-gsp-example.json"
+  },
+  "type": "object",
+  "required": ["datetime_gmt", "generation_mw"],
+  "properties": {
+    "gsp_id": {
+      "type": "integer",
+      "description": "Grid Supply Point identifier. 0 is the GB national aggregate.",
+      "minimum": 0
+    },
+    "pes_id": {
+      "type": "integer",
+      "description": "Public Electricity Supplier region identifier. 0 is the GB national aggregate.",
+      "minimum": 0
+    },
+    "datetime_gmt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Half-hourly settlement period timestamp in GMT/UTC.",
+      "examples": ["2026-08-20T11:00:00Z"]
+    },
+    "generation_mw": {
+      "type": "number",
+      "description": "Estimated solar PV generation in megawatts for the settlement period.",
+      "minimum": 0,
+      "examples": [8610.46]
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,103 @@
+---
+generated: '2026-08-30'
+method: probed
+source: live probes of University of Sheffield surfaces, 2026-08-30
+provider: University of Sheffield
+regime: education
+description: >-
+  Domain-standard conformance for the University of Sheffield, probed against the
+  Kin Score `education` regime standards[] list. Reward-only: a standard absent
+  from this file was not found, not disproved. Every hit below points at the exact
+  location the evidence was read from, and each carries the operator of the surface
+  the standard is implemented on — an institution can conform through a tenanted
+  platform, and that is recorded as tenant, not as institution engineering.
+standards:
+  - standard: shibboleth
+    conformant: true
+    x-operator: institution
+    evidence:
+      url: https://idp.shef.ac.uk/idp/shibboleth
+      status: 200
+      content_type: application/xml
+      location: 'EntityDescriptor@entityID = https://idp.shef.ac.uk/shibboleth; IDPSSODescriptor present'
+    detail: >-
+      Institution-operated Shibboleth identity provider serving live SAML metadata
+      from the university's own shef.ac.uk domain.
+  - standard: saml
+    conformant: true
+    x-operator: institution
+    evidence:
+      url: https://idp.shef.ac.uk/idp/shibboleth
+      status: 200
+      location: >-
+        IDPSSODescriptor protocolSupportEnumeration includes
+        urn:oasis:names:tc:SAML:2.0:protocol; SingleSignOnService bindings
+        HTTP-POST, HTTP-POST-SimpleSign, HTTP-Redirect and SOAP declared
+    detail: SAML 2.0 (and legacy SAML 1.1) endpoints declared and reachable.
+  - standard: oai-pmh
+    conformant: true
+    x-operator: tenant
+    evidence:
+      - url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=Identify
+        status: 200
+        location: 'Identify: repositoryName "White Rose Research Online", protocolVersion 2.0'
+      - url: https://etheses.whiterose.ac.uk/cgi/oai2?verb=Identify
+        status: 200
+        location: 'Identify: repositoryName "White Rose eTheses Online", protocolVersion 2.0'
+      - url: https://orda.shef.ac.uk/oai?verb=Identify
+        status: 202
+        location: Cloudflare bot challenge; endpoint live but unreadable to a scripted client
+    detail: >-
+      OAI-PMH 2.0 conformance confirmed on both White Rose consortium repositories
+      Sheffield co-owns with Leeds and York. ORDA's own OAI endpoint is live but
+      sits behind a Cloudflare challenge. The software is EPrints and figshare —
+      the deployments are Sheffield's, the protocol implementations are not.
+  - standard: orcid
+    conformant: true
+    x-operator: tenant
+    evidence:
+      url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=ListMetadataFormats
+      status: 200
+      location: 'metadataPrefix "oai_dc_orcid" offered alongside oai_dc, rioxx, oai_openaire, uketd_dc'
+    detail: >-
+      White Rose Research Online exposes an ORCID-bearing metadata format for
+      harvest, so Sheffield-authored records carry ORCID identifiers over OAI-PMH.
+  - standard: datacite
+    conformant: true
+    x-operator: tenant
+    evidence:
+      - url: https://api.datacite.org/providers?query=sheffield
+        status: 200
+        location: 'provider id "ooki" = University of Sheffield, website https://sheffield.ac.uk/library'
+      - url: https://api.datacite.org/clients?query=sheffield
+        status: 200
+        location: 'client id "bl.shef" = ORDA - The University of Sheffield Research Data Catalogue and Repository'
+    detail: >-
+      The University of Sheffield is a registered DataCite provider and ORDA is a
+      registered DataCite repository client, so ORDA deposits mint DataCite DOIs
+      with DataCite metadata.
+not_found:
+  - standard: scim
+    detail: No SCIM 2.0 endpoint or discovery document found on any institution host.
+  - standard: lti
+    detail: >-
+      No institution-published LTI registration, tool configuration or platform
+      discovery document found on any Sheffield host. The VLE was not probed
+      behind its login, so this is an absence of public evidence, not a finding
+      that LTI is unused internally.
+  - standard: oneroster
+    detail: Not found; OneRoster is a K-12 standard and is not expected here.
+  - standard: ed-fi
+    detail: Not found; Ed-Fi is a US K-12 standard and is not expected here.
+  - standard: caliper
+    detail: No public Caliper Analytics endpoint or sensor declaration found.
+  - standard: qti
+    detail: No public QTI item bank or QTI-conformant assessment surface found.
+  - standard: crossref
+    detail: >-
+      Sheffield outputs appear in Crossref through publisher deposits, not through
+      an institution-operated Crossref deposit surface. No institutional evidence
+      found, so no credit claimed.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

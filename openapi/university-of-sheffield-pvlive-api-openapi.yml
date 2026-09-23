@@ -1,0 +1,516 @@
+openapi: 3.2.0
+info:
+  title: Sheffield Solar Pvlive API
+  version: 0.1.0
+  description: PV_Live API endpoints.
+tags:
+- name: pvlive
+  description: PV_Live API endpoints.
+paths:
+  /pvlive/api/v4/gsp/{gsp_id}:
+    get:
+      tags:
+      - pvlive
+      summary: PV_Live GSP data
+      description: Get PV_Live data for a specific GSP.
+      operationId: pvlive_gsp_pvlive_api_v4_gsp__gsp_id__get
+      parameters:
+      - name: gsp_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Gsp Id
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: YYYY-mm-ddTHH:MM
+          - type: 'null'
+          title: Start
+        description: 'Optional start time. Format: YYYY-mm-ddTHH:MM'
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: YYYY-mm-ddTHH:MM
+          - type: 'null'
+          title: End
+        description: 'Optional end time. Format: YYYY-mm-ddTHH:MM'
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - bias_error
+            - capacity_mwp
+            - installedcapacity_mwp
+            - lcl_mw
+            - site_count
+            - stats_error
+            - ucl_mw
+            - uncertainty_mw
+            - updated_gmt
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: updated_gmt_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated Gmt From
+      - name: updated_gmt_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated Gmt To
+      - name: period
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - const: '30'
+            type: string
+          - type: 'null'
+          description: 'Deprecated: The 5 minute interval is no longer available. The 30 minute interval is the default.'
+          deprecated: true
+          title: Period
+        description: 'Deprecated: The 5 minute interval is no longer available. The 30 minute interval is the default.'
+        deprecated: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvlive/api/v4/pes/0:
+    get:
+      tags:
+      - pvlive
+      summary: Pvlive Pes0
+      description: PES live generation data — (National Aggregate).
+      operationId: pvlive_pes0_pvlive_api_v4_pes_0_get
+      parameters:
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: YYYY-mm-ddTHH:MM
+          - type: 'null'
+          title: Start
+        description: 'Optional start time. Format: YYYY-mm-ddTHH:MM'
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: YYYY-mm-ddTHH:MM
+          - type: 'null'
+          title: End
+        description: 'Optional end time. Format: YYYY-mm-ddTHH:MM'
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - bias_error
+            - capacity_mwp
+            - installedcapacity_mwp
+            - lcl_mw
+            - site_count
+            - stats_error
+            - ucl_mw
+            - uncertainty_mw
+            - updated_gmt
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: updated_gmt_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated Gmt From
+      - name: updated_gmt_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated Gmt To
+      - name: period
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - const: '30'
+            type: string
+          - type: 'null'
+          description: 'Deprecated: The 5 minute interval is no longer available. The 30 minute interval is the default.'
+          deprecated: true
+          title: Period
+        description: 'Deprecated: The 5 minute interval is no longer available. The 30 minute interval is the default.'
+        deprecated: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvlive/api/v4/pes/{pes_id}:
+    get:
+      tags:
+      - pvlive
+      summary: PV_Live PES data
+      description: Get PV_Live data for a specific PES region.
+      operationId: pvlive_pes_pvlive_api_v4_pes__pes_id__get
+      parameters:
+      - name: pes_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          maximum: 23
+          minimum: 10
+          title: Pes Id
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: YYYY-mm-ddTHH:MM
+          - type: 'null'
+          title: Start
+        description: 'Optional start time. Format: YYYY-mm-ddTHH:MM'
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: YYYY-mm-ddTHH:MM
+          - type: 'null'
+          title: End
+        description: 'Optional end time. Format: YYYY-mm-ddTHH:MM'
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - bias_error
+            - capacity_mwp
+            - installedcapacity_mwp
+            - lcl_mw
+            - site_count
+            - stats_error
+            - ucl_mw
+            - uncertainty_mw
+            - updated_gmt
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: updated_gmt_from
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated Gmt From
+      - name: updated_gmt_to
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated Gmt To
+      - name: period
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - const: '30'
+            type: string
+          - type: 'null'
+          description: 'Deprecated: The 5 minute interval is no longer available. The 30 minute interval is the default.'
+          deprecated: true
+          title: Period
+        description: 'Deprecated: The 5 minute interval is no longer available. The 30 minute interval is the default.'
+        deprecated: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvlive/api/v4/gsp_list:
+    get:
+      tags:
+      - pvlive
+      summary: PV_Live GSP List
+      description: List all GSP regions.
+      operationId: pvlive_gsp_list_pvlive_api_v4_gsp_list_get
+      parameters:
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvlive/api/v4/pes_list:
+    get:
+      tags:
+      - pvlive
+      summary: PV_Live PES List
+      description: List all PES regions.
+      operationId: pvlive_pes_list_pvlive_api_v4_pes_list_get
+      parameters:
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvlive/api/v4/passiv_reading_count/{start_at}:
+    get:
+      tags:
+      - pvlive
+      summary: Passiv Reading Count
+      description: Return 2-minute-bucketed Passiv reading counts for the 1-hour window.
+      operationId: passiv_reading_count_pvlive_api_v4_passiv_reading_count__start_at__get
+      parameters:
+      - name: start_at
+        in: path
+        required: true
+        schema:
+          type: string
+          format: date-time
+          title: Start At
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvlive/api/v4/peakgeneration:
+    get:
+      tags:
+      - pvlive
+      summary: Peakgeneration
+      description: Return the single highest national generation reading in the last 4 years.
+      operationId: peakgeneration_pvlive_api_v4_peakgeneration_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /auth/jwt/login
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: ssapi_session
+    HTTPBasic:
+      type: http
+      scheme: basic

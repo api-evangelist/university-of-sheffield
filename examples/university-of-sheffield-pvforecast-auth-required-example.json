@@ -1,0 +1,13 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0",
+  "note": "Captured live. Records the access boundary: PV_Live is keyless, PV_Forecast is not.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0",
+    "auth": "none supplied",
+    "status": 401
+  },
+  "response": { "detail": "Missing user identifier. Supply X-User-Id header." }
+}

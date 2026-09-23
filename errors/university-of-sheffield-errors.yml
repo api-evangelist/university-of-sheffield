@@ -1,0 +1,49 @@
+---
+generated: '2026-08-30'
+method: derived
+source: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
+probed:
+  - url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/notanumber
+    status: 422
+  - url: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
+    status: 401
+provider: University of Sheffield
+api: Sheffield Solar API
+description: >-
+  Error contract for the University of Sheffield's own Sheffield Solar API. The
+  service is FastAPI-based, so validation failures return the RFC-shaped
+  HTTPValidationError declared in the published OpenAPI, and access failures
+  return a flat detail string. Both shapes were confirmed by live probe on
+  2026-08-30.
+format:
+  media_type: application/json
+  problem_details_rfc9457: false
+  note: >-
+    Errors are FastAPI's native envelope, not RFC 9457 application/problem+json.
+    A `detail` key carries either a string (access and routing errors) or an
+    array of field-level validation objects (422).
+errors:
+  - status: 401
+    shape: '{"detail": "<string>"}'
+    example: '{"detail":"Missing user identifier. Supply X-User-Id header."}'
+    meaning: >-
+      PV_Forecast endpoints require a registered user identifier supplied in the
+      X-User-Id header. PV_Live and PV_Live_EU read endpoints do not.
+    evidence: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
+  - status: 422
+    shape: '{"detail": [{"type": "<string>", "loc": ["<string>"], "msg": "<string>", "input": "<any>"}]}'
+    example: '{"detail":[{"type":"int_parsing","loc":["path","gsp_id"],"msg":"Input should be a valid integer, unable to parse string as an integer","input":"notanumber"}]}'
+    meaning: Request validation failure. `loc` names the offending parameter and its location.
+    evidence: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/notanumber
+    schema_ref: '#/components/schemas/HTTPValidationError'
+  - status: 404
+    shape: HTML (nginx default)
+    meaning: >-
+      Unrouted path. Note that /health/live and /health/ready are declared in the
+      published OpenAPI but return an nginx 404 from the public edge — the health
+      probes are not exposed publicly. Recorded as a contract/deployment drift,
+      not as an outage.
+    evidence: https://api.solar.sheffield.ac.uk/health/ready
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,20 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/0",
+  "note": "Captured live from the University of Sheffield's own Sheffield Solar API. Unmodified response body.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/0?start=2026-08-20T10:00:00&end=2026-08-20T11:00:00",
+    "auth": "none — PV_Live read endpoints are keyless",
+    "status": 200
+  },
+  "response": {
+    "meta": ["gsp_id", "datetime_gmt", "generation_mw"],
+    "data": [
+      [0, "2026-08-20T11:00:00Z", 8610.46],
+      [0, "2026-08-20T10:30:00Z", 8130.14],
+      [0, "2026-08-20T10:00:00Z", 8005.58]
+    ]
+  }
+}

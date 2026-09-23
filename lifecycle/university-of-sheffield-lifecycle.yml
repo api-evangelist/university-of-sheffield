@@ -1,0 +1,61 @@
+---
+generated: '2026-08-30'
+method: searched
+source: https://www.solar.sheffield.ac.uk/api/
+provider: University of Sheffield
+api: Sheffield Solar API
+x-operator: institution
+description: >-
+  Versioning and change posture for the one institution-operated API the University
+  of Sheffield publishes. Read from the provider's own words, not inferred.
+versioning:
+  style: path
+  evidence:
+    - path_prefix: /pvlive/api/v4/
+      product: PV_Live
+      current: v4
+    - path_prefix: /pvlive_eu/api/v5/
+      product: PV_Live_EU
+      current: v5
+    - path_prefix: /pvforecast/api/v4/
+      product: PV_Forecast
+      current: v4
+  document_version: '0.1.0'
+  document_version_note: >-
+    info.version in the published OpenAPI is the FastAPI default 0.1.0 and does not
+    track the path-level API versions. The site footer separately reads "Sheffield
+    Solar 2.0.0". The contract carries no usable version signal.
+stability:
+  declared: unstable
+  provider_statement: >-
+    "We are actively developing the PV_Live API, so we may change the base-url,
+    end-points, authentication, response format etc. If you want to be notified of
+    any changes to the API in advance, please contact us and we'll add you to our
+    mailing list."
+  source: https://www.solar.sheffield.ac.uk/api/
+  read_as: >-
+    An explicit no-stability-guarantee notice. This is honest and unusually clear
+    for a research-group API, but it means no deprecation policy, no sunset header
+    commitment and no versioned change log are on offer.
+deprecation:
+  policy_published: false
+  sunset_header: not observed
+  changelog: not published
+  advance_notice_channel:
+    type: mailing list, on request
+    url: https://api.solar.sheffield.ac.uk/pvlive/contact
+status_page:
+  url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+  status: 200
+  note: Provider-published uptime page for PV_Live.
+contract_drift:
+  - observed: >-
+      /health/live and /health/ready are declared in the published OpenAPI but the
+      public edge returns an nginx 404 for both.
+    evidence:
+      url: https://api.solar.sheffield.ac.uk/health/ready
+      status: 404
+    read_as: internal probes leaked into the public contract document
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

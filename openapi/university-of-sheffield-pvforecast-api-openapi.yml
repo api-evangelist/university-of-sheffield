@@ -1,0 +1,550 @@
+openapi: 3.2.0
+info:
+  title: Sheffield Solar Pvforecast API
+  version: 0.1.0
+  description: PV_Forecast API endpoints.
+tags:
+- name: pvforecast
+  description: PV_Forecast API endpoints.
+paths:
+  /pvforecast/api/v4/hicast:
+    get:
+      tags:
+      - pvforecast
+      summary: Hicast
+      description: Return hicast (historical forecast) data for GSP 0 (national aggregate).
+      operationId: hicast_pvforecast_api_v4_hicast_get
+      parameters:
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - capacity_mwp
+            - installedcapacity_mwp
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      - name: key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      - name: forecast_base_gmt
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Forecast Base Gmt
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvforecast/api/v4/gsp/{gsp_id}:
+    get:
+      tags:
+      - pvforecast
+      summary: PV_Forecast GSP data
+      description: Get PV_Forecast data for a specific GSP.
+      operationId: pvforecast_gsp_pvforecast_api_v4_gsp__gsp_id__get
+      parameters:
+      - name: gsp_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Gsp Id
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - capacity_mwp
+            - installedcapacity_mwp
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      - name: key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      - name: forecast_base_gmt
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Forecast Base Gmt
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvforecast/api/v4/pes/0:
+    get:
+      tags:
+      - pvforecast
+      summary: Pvforecast Pes0
+      description: PES forecast data.
+      operationId: pvforecast_pes0_pvforecast_api_v4_pes_0_get
+      parameters:
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - capacity_mwp
+            - installedcapacity_mwp
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      - name: key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      - name: forecast_base_gmt
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Forecast Base Gmt
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvforecast/api/v4/pes/{pes_id}:
+    get:
+      tags:
+      - pvforecast
+      summary: PV_Forecast PES data
+      description: Get PV_Forecast data for a specific PES region.
+      operationId: pvforecast_pes_pvforecast_api_v4_pes__pes_id__get
+      parameters:
+      - name: pes_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          maximum: 23
+          minimum: 10
+          title: Pes Id
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      - name: extra_field
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            enum:
+            - capacity_mwp
+            - installedcapacity_mwp
+            type: string
+          description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+          default: []
+          title: Extra Field
+        description: 'A repeated query parameter. Example: ?extra_field=capacity_mwp&extra_field=installedcapacity_mwp'
+      - name: extra_fields
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Extra Fields
+          description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+          deprecated: true
+        description: 'Deprecated: Use extra_field instead. A comma-separated list of extra fields to include in the response.'
+        deprecated: true
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      - name: key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      - name: forecast_base_gmt
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Forecast Base Gmt
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvforecast/api/v4/forecast_bases_list:
+    get:
+      tags:
+      - pvforecast
+      summary: Forecast Bases List0
+      description: Return a list of distinct forecast base datetimes for the given GSP.
+      operationId: forecast_bases_list0_pvforecast_api_v4_forecast_bases_list_get
+      parameters:
+      - name: gsp_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 0
+          title: Gsp Id
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      - name: key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /pvforecast/api/v4/forecast_bases_list/{gsp_id}:
+    get:
+      tags:
+      - pvforecast
+      summary: Forecast Bases List
+      description: Return a list of distinct forecast base datetimes for the given GSP.
+      operationId: forecast_bases_list_pvforecast_api_v4_forecast_bases_list__gsp_id__get
+      parameters:
+      - name: gsp_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Gsp Id
+      - name: gsp_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: 0
+          title: Gsp Id
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+      - name: key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Key
+      - name: start
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start
+      - name: end
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End
+      - name: data_format
+        in: query
+        required: false
+        schema:
+          enum:
+          - csv
+          - json
+          type: string
+          default: json
+          title: Data Format
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /auth/jwt/login
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: ssapi_session
+    HTTPBasic:
+      type: http
+      scheme: basic

@@ -4,30 +4,30 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of Sheffield
 providerId: university-of-sheffield
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reconciled: false
 tags:
 - Education
 - Higher Education
 - University
 - Plans
-description: >-
-  University of Sheffield is a non-commercial higher-education institution; its APIs are not sold
-  as a commercial product. Public APIs (library, repository, course, and open-metadata
-  interfaces) are offered free of charge, typically for non-commercial use. Most
-  administrative and identity APIs are not openly self-service and require institutional
-  affiliation, credentials, or federation membership rather than a paid plan.
-notes: >-
-  No published per-seat or per-call commercial pricing. "Free / Open" reflects open
-  public endpoints; "Affiliation / Credentialed" reflects access gated by institutional
-  identity rather than payment.
+description: 'The University of Sheffield sells no API. Its one institution-operated API, the Sheffield
+  Solar API, is free: PV_Live and PV_Live_EU read endpoints are keyless and answered 200 on probe (2026-08-30),
+  while PV_Forecast requires a free registered user identifier and returns 401 without one. Every other
+  surface in this profile is a vendor-tenanted platform (figshare, EPrints, Ex Libris) whose commercial
+  terms are the vendor''s, not Sheffield''s, or is gated behind the institution''s Shibboleth identity
+  provider by affiliation rather than by payment.'
+notes: No per-seat or per-call pricing exists. 'Free / Open' is the keyless PV_Live tier, verified live.
+  'Affiliation / Credentialed' covers PV_Forecast registration and everything behind institutional SSO.
+  Do not read the vendor platforms' pricing as Sheffield's.
 sources:
 - https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/apis.yml
 plans:
 - id: university-of-sheffield-free-open
   name: Free / Open
   type: free
-  description: Public open APIs (metadata, library, repository, course data) offered at no charge, generally for non-commercial use.
+  description: Public open APIs (metadata, library, repository, course data) offered at no charge, generally
+    for non-commercial use.
   entries:
   - label: Open API Access
     name: open_api_access
@@ -42,7 +42,8 @@ plans:
 - id: university-of-sheffield-affiliation
   name: Affiliation / Credentialed
   type: free
-  description: Administrative and identity APIs gated behind institutional SSO, client certificates, or federation membership rather than payment.
+  description: Administrative and identity APIs gated behind institutional SSO, client certificates, or
+    federation membership rather than payment.
   entries:
   - label: Credentialed Access
     name: credentialed_access

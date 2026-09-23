@@ -1,0 +1,58 @@
+openapi: 3.2.0
+info:
+  title: Sheffield Solar Health API
+  version: 0.1.0
+tags:
+- name: Health
+paths:
+  /health/live:
+    get:
+      tags:
+      - Health
+      summary: Liveness Probe
+      description: 'Liveness check.
+
+        Purely validates that the event loop isn''t blocked.'
+      operationId: liveness_probe_health_live_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Liveness Probe Health Live Get
+  /health/ready:
+    get:
+      tags:
+      - Health
+      summary: Readiness Probe
+      description: 'Readiness check.
+
+        Validates downstream dependencies concurrently.'
+      operationId: readiness_probe_health_ready_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Readiness Probe Health Ready Get
+components:
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /auth/jwt/login
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: ssapi_session
+    HTTPBasic:
+      type: http
+      scheme: basic

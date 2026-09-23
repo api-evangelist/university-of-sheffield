@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/main/json-schema/university-of-sheffield-pvlive-response-schema.json",
+  "title": "SheffieldSolarTabularResponse",
+  "description": "The column-oriented envelope every Sheffield Solar PV_Live, PV_Live_EU and PV_Forecast data endpoint returns: a meta array naming the columns, and a data array of positional rows. Derived from the institution's own OpenAPI at https://api.solar.sheffield.ac.uk/openapi.json and from live probed responses on 2026-08-30.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "openapi/university-of-sheffield-sheffield-solar-api-openapi.yml"
+  },
+  "type": "object",
+  "required": ["meta", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "meta": {
+      "type": "array",
+      "description": "Ordered column names for each row in data.",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "examples": [["gsp_id", "datetime_gmt", "generation_mw"]]
+    },
+    "data": {
+      "type": "array",
+      "description": "Rows of values, positionally aligned to meta.",
+      "items": {
+        "type": "array",
+        "items": { "type": ["string", "number", "integer", "null"] }
+      }
+    }
+  }
+}

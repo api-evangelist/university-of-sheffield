@@ -1,0 +1,507 @@
+openapi: 3.2.0
+info:
+  title: Sheffield Solar User API
+  version: 0.1.0
+tags:
+- name: User
+paths:
+  /user/login:
+    get:
+      summary: Get Login Form
+      description: Render the login page.
+      operationId: get_login_form_user_login_get
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      parameters:
+      - name: csrf_error
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Csrf Error
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+    post:
+      summary: Handle Login
+      description: Handle login form submissions securely via middleware-backed CSRF with Captcha Step-up.
+      operationId: handle_login_user_login_post
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_handle_login_user_login_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+  /user/register:
+    post:
+      summary: Handle Registration
+      description: Process user registrations safely with background validation parsing and Step-Up challenges.
+      operationId: handle_registration_user_register_post
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_handle_registration_user_register_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+    get:
+      summary: Get Register Form
+      description: Render the PVForecast user registration form.
+      operationId: get_register_form_user_register_get
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      parameters:
+      - name: csrf_error
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Csrf Error
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+  /user/logout:
+    get:
+      summary: Handle Logout
+      description: Clear the auth cookie and redirect to the landing page.
+      operationId: handle_logout_user_logout_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      tags:
+      - User
+  /user/user:
+    get:
+      summary: Pvforecast User
+      description: Render the authenticated user's dashboard, showing their active API tokens.
+      operationId: pvforecast_user_user_user_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      tags:
+      - User
+  /user/forgot-password:
+    get:
+      summary: Forgot Password Page
+      description: Render the forgot password page.
+      operationId: forgot_password_page_user_forgot_password_get
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      parameters:
+      - name: csrf_error
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Csrf Error
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+    post:
+      summary: Handle Forgot Password
+      description: 'Processes the forgot password form submission natively on the server.
+
+        Protected automatically by FastAPICSRFJinjaMiddleware.'
+      operationId: handle_forgot_password_user_forgot_password_post
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_handle_forgot_password_user_forgot_password_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+  /user/reset-password:
+    get:
+      summary: Reset Password Page
+      description: This route is emailed to a user. It includes a token as a query parameter.
+      operationId: reset_password_page_user_reset_password_get
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      parameters:
+      - name: token
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+    post:
+      summary: Handle Reset Password Submission
+      description: 'Processes the new password submission on the server.
+
+        Protected automatically by FastAPICSRFJinjaMiddleware.'
+      operationId: handle_reset_password_submission_user_reset_password_post
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_handle_reset_password_submission_user_reset_password_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+  /user/verify:
+    get:
+      summary: Verify Page
+      description: Render the initial email verification page landing button.
+      operationId: verify_page_user_verify_get
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Token
+      - name: csrf_error
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 0
+          title: Csrf Error
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+    post:
+      summary: Handle Verify
+      description: 'Processes the verification form submission on the server.
+
+        Protected automatically by FastAPICSRFJinjaMiddleware.'
+      operationId: handle_verify_user_verify_post
+      security:
+      - OAuth2PasswordBearer: []
+      - APIKeyCookie: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_handle_verify_user_verify_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            text/html:
+              schema:
+                type: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - User
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_handle_registration_user_register_post:
+      properties:
+        email:
+          type: string
+          title: Email
+        password:
+          type: string
+          title: Password
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        phone:
+          type: string
+          title: Phone
+        company:
+          type: string
+          title: Company
+        tandc:
+          type: boolean
+          title: Tandc
+        g-recaptcha-response:
+          type: string
+          title: G-Recaptcha-Response
+          default: ''
+        captcha-version:
+          type: string
+          title: Captcha-Version
+          default: v3
+      type: object
+      required:
+      - email
+      - password
+      title: Body_handle_registration_user_register_post
+    Body_handle_verify_user_verify_post:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: Body_handle_verify_user_verify_post
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Body_handle_reset_password_submission_user_reset_password_post:
+      properties:
+        token:
+          type: string
+          title: Token
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - token
+      - password
+      title: Body_handle_reset_password_submission_user_reset_password_post
+    Body_handle_forgot_password_user_forgot_password_post:
+      properties:
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - email
+      title: Body_handle_forgot_password_user_forgot_password_post
+    Body_handle_login_user_login_post:
+      properties:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          format: password
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          format: password
+          title: Client Secret
+        g-recaptcha-response:
+          type: string
+          title: G-Recaptcha-Response
+          default: ''
+        captcha-version:
+          type: string
+          title: Captcha-Version
+          default: v3
+      type: object
+      required:
+      - username
+      - password
+      title: Body_handle_login_user_login_post
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /auth/jwt/login
+    APIKeyCookie:
+      type: apiKey
+      in: cookie
+      name: ssapi_session
+    HTTPBasic:
+      type: http
+      scheme: basic

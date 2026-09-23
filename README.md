@@ -64,24 +64,44 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of Sheffield is a public research university in Sheffield, United Kingdom, ranked #105 in the QS World University Rankings 2025. This repository catalogs its public developer and API footprint as an APIs.json provider profile. Sheffield's public API surface is concentrated in open research infrastructure — the ORDA research data repository (figshare) and the shared White Rose EPrints repositories — rather than a single unified developer portal.
+The University of Sheffield is a public research university in Sheffield, United Kingdom, and a member of the Russell Group. This repository catalogs its public developer and API footprint as an APIs.json provider profile, with the **operator** of every surface settled before anything was saved.
+
+Sheffield's programmable footprint is small and mostly indirect. There is no central developer portal, no API gateway, no self-service key issuance, and no documented course, timetable or student-information API. What the institution genuinely operates is one first-party research API — the **Sheffield Solar API**, which publishes its own OpenAPI 3.1 document and serves keyless PV_Live estimates of GB solar generation — and its own **Shibboleth SAML identity provider**. Everything else that looks like a Sheffield API is a vendor's contract running under Sheffield's name.
 
 - APIs.json: https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/apis.yml
 - Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=university-of-sheffield-api-evangelist&utm_content=repo
 
 ## Type
 
-- Index / Consumer / 3rd-Party
+- University / Public Research University / Producer / Public
 
 ## Tags
 
-Education, Higher Education, University, Research Data, Open Access, OAI-PMH, United Kingdom
+University, Higher Education, Education, United Kingdom, Russell Group, Research Data, Open Access, OAI-PMH, Identity Federation, Solar Energy, Energy Data, Research Computing
 
 ## APIs
 
-- **ORDA Research Data Repository (figshare API)** — Sheffield's research data repository on figshare, accessible via the figshare REST API and an OAI-PMH endpoint. Docs: https://docs.figshare.com/ — Portal: https://orda.shef.ac.uk/
-- **White Rose Research Online OAI-PMH** — Shared open-access EPrints repository (Leeds, Sheffield, York); OAI-PMH metadata harvesting. Docs: https://eprints.whiterose.ac.uk/information.html — Endpoint: https://eprints.whiterose.ac.uk/cgi/oai2
-- **White Rose eTheses Online OAI-PMH** — Shared electronic theses EPrints repository; OAI-PMH metadata harvesting. Portal: https://etheses.whiterose.ac.uk/ — Endpoint: https://etheses.whiterose.ac.uk/cgi/oai2
+Every entry carries an `x-operator`: `institution` means Sheffield runs the thing the contract describes; `tenant` means Sheffield's data on a vendor's platform, where the relationship is real but the engineering is not Sheffield's.
+
+- **Sheffield Solar API** — `x-operator: institution`. Sheffield's own research API, built and run by the Sheffield Solar group in Physics and Astronomy. PV_Live (near-real-time and historical GB solar PV generation by GSP and PES region), PV_Live_EU (European NUTS regions) and PV_Forecast (day-ahead). PV_Live reads are keyless and answered 200 on probe; PV_Forecast returns 401 without a registered `X-User-Id` header. Publishes its own OpenAPI 3.1 at https://api.solar.sheffield.ac.uk/openapi.json — Docs: https://www.solar.sheffield.ac.uk/api/
+- **University of Sheffield Shibboleth Identity Provider** — `x-operator: institution`. Live SAML 2.0 metadata, entityID `https://idp.shef.ac.uk/shibboleth`, served from Sheffield's own domain. Machine-readable, institution-operated by definition, and the access path through which affiliates reach every bought platform. Metadata: https://idp.shef.ac.uk/idp/shibboleth
+- **ORDA — Online Research Data** — `x-operator: tenant`. Sheffield's research data repository on figshare. Sheffield's records and DataCite DOIs (provider `ooki`, client `bl.shef`); figshare's platform and API contract. No spec is saved here on purpose. Portal: https://orda.shef.ac.uk/
+- **White Rose Research Online OAI-PMH** — `x-operator: tenant`. Shared open-access EPrints repository (Leeds, Sheffield, York). OAI-PMH 2.0, thirteen metadata formats including `oai_dc_orcid`. Endpoint: https://eprints.whiterose.ac.uk/cgi/oai2
+- **White Rose eTheses Online OAI-PMH** — `x-operator: tenant`. Shared electronic theses EPrints repository. OAI-PMH 2.0. Endpoint: https://etheses.whiterose.ac.uk/cgi/oai2
+
+## Domain standard conformance (Kin Score `education` regime)
+
+Probed 2026-08-30, reward-only, evidence in `conformance/`:
+
+| Standard | Conformant | Operator | Evidence |
+|---|---|---|---|
+| shibboleth | yes | institution | `EntityDescriptor@entityID` at https://idp.shef.ac.uk/idp/shibboleth |
+| saml | yes | institution | SAML 2.0 SSO/SLO bindings in the same metadata |
+| oai-pmh | yes | tenant | `Identify` 200 on both White Rose endpoints, protocolVersion 2.0 |
+| orcid | yes | tenant | `oai_dc_orcid` in WRRO `ListMetadataFormats` |
+| datacite | yes | tenant | DataCite provider `ooki`, client `bl.shef` |
+
+Not found: scim, lti, oneroster, ed-fi, caliper, qti, crossref.
 
 ## Plans
 
@@ -98,19 +118,32 @@ Education, Higher Education, University, Research Data, Open Access, OAI-PMH, Un
 ## Timestamps
 
 - Created: 2026-06-03
-- Modified: 2026-06-03
+- Modified: 2026-08-30
 
 ## Common Properties
 
 - Website: https://www.sheffield.ac.uk/
+- API Reference: https://api.solar.sheffield.ac.uk/redoc
+- Identity Federation: https://idp.shef.ac.uk/idp/shibboleth
+- Research Repository: https://orda.shef.ac.uk/
+- Library Catalog: https://find.shef.ac.uk/
+- Research Computing: https://docs.hpc.shef.ac.uk/en/latest/
 - GitHub: https://github.com/SheffieldUni
-- SourceCode (RSE/IT): https://github.com/rcgsheffield
+- SourceCode (RSE/IT): https://github.com/rcgsheffield · https://github.com/RSE-Sheffield · https://github.com/SheffieldSolar
 - LinkedIn: https://www.linkedin.com/school/university-of-sheffield/
 - Twitter: https://twitter.com/sheffielduni
 
+## Attribution correction, 2026-08-30
+
+This profile was rebuilt under the API Evangelist university pipeline. The 2026-06-03 profile had saved **figshare's own contract** under Sheffield's slug: `openapi/_original/university-of-sheffield-orda.yaml` declared `info.title: Figshare API`, `contact: Figshare Support` and `servers: [https://api.figshare.com/v2]`. It had been split into ten per-tag specs and registered as eleven `apis[]` entries — eleven times the apparent footprint, for one vendor document that eleven other universities in this cohort also ship.
+
+Ten contracts, their figshare source document, and thirty-six derived artifacts (schemas, structures, examples, rulesets, vocabulary, JSON-LD context, Postman/OpenCollection collections, scopes, authentication and capability edges) were removed, because everything derived from a vendor contract inherits its provenance. The ORDA relationship was **kept** and relabelled `tenant` — it is a real institutional fact, and deleting it to avoid the misattribution would have been the opposite error.
+
+**Expect this repository's Kin Score to fall.** It should. The old number was largely figshare's.
+
 ## Notes
 
-All endpoints listed were probed on 2026-06-03; see review.yml for HTTP status results. The ORDA portal and OAI endpoint sit behind a Cloudflare challenge (HTTP 202) but resolve in-browser; the figshare REST API and both White Rose OAI-PMH Identify responses were verified live. No course, timetable, or student-information APIs are publicly documented, and no Sheffield-branded developer portal was found; institutional APIs are platform-provided (figshare, EPrints). No endpoints were fabricated.
+Probed 2026-08-30. `api.sheffield.ac.uk`, `data.sheffield.ac.uk`, `shib.sheffield.ac.uk` and `sso.sheffield.ac.uk` do not resolve. `llms.txt` and `.well-known/security.txt` return 404 on the main site. ORDA's own OAI-PMH endpoint is live but returns a Cloudflare 202 bot challenge to scripted clients, so its `Identify` response could not be read — a block on us, not a gap in Sheffield. `/health/live` and `/health/ready` are declared in the Sheffield Solar OpenAPI but return an nginx 404 at the public edge; recorded as contract drift in `lifecycle/`. No endpoints were fabricated.
 
 ## Maintainers
 

@@ -1,0 +1,57 @@
+{
+  "provider": "university-of-sheffield",
+  "sources": [
+    "_original/university-of-sheffield-sheffield-solar-openapi.json"
+  ],
+  "outputs": [
+    "university-of-sheffield-user-api-openapi.yml",
+    "university-of-sheffield-admin-api-openapi.yml",
+    "university-of-sheffield-api-auth-api-openapi.yml",
+    "university-of-sheffield-auth-api-openapi.yml",
+    "university-of-sheffield-health-api-openapi.yml",
+    "university-of-sheffield-metrics-api-openapi.yml",
+    "university-of-sheffield-pvforecast-api-openapi.yml",
+    "university-of-sheffield-pvlive-api-openapi.yml",
+    "university-of-sheffield-pvlive-eu-api-openapi.yml",
+    "university-of-sheffield-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "university-of-sheffield-sheffield-solar-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/login -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths POST /user/login -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths POST /user/register -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/register -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/logout -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/user -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/forgot-password -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths POST /user/forgot-password -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/reset-password -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths POST /user/reset-password -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths GET /user/verify -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: tagged paths POST /user/verify -> User",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: User",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: admin",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: api-auth",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: auth",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: health",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: metrics",
+    "university-of-sheffield-sheffield-solar-openapi.json: declared missing tag: users",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "university-of-sheffield-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-api-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-auth-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-pvforecast-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-pvlive-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-pvlive-eu-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "university-of-sheffield-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

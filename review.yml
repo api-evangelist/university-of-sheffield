@@ -3,48 +3,135 @@ name: University of Sheffield
 description: University of Sheffield public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/university-of-sheffield/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
-  - date: '2026-06-03'
-    rating: 2
-    summary: >-
-      Verified live: the ORDA research data repository (orda.shef.ac.uk) and its
-      OAI-PMH endpoint, the figshare REST API used by ORDA, and both White Rose
-      OAI-PMH endpoints (WRRO and WREO) which correctly Identify as their
-      respective repositories. The official SheffieldUni GitHub organization is
-      live with public IT/integration tooling. No general self-service developer
-      portal or documented course/timetable/student-information APIs were found;
-      most institutional APIs are platform-provided (figshare, EPrints) rather
-      than Sheffield-branded. No endpoints were fabricated; the shibboleth host
-      did not resolve and was excluded.
-    endpoints:
-      - url: https://www.sheffield.ac.uk/
-        status: 200
-        note: Official university website, live.
-      - url: https://orda.shef.ac.uk/
-        status: 202
-        note: ORDA figshare research data repository (Cloudflare 202 challenge response).
-      - url: https://orda.shef.ac.uk/oai?verb=Identify
-        status: 202
-        note: ORDA OAI-PMH endpoint (behind Cloudflare challenge).
-      - url: https://api.figshare.com/v2/articles?page_size=1
-        status: 200
-        note: figshare REST API powering ORDA, responds to public article queries.
-      - url: https://docs.figshare.com/
-        status: 200
-        note: figshare API documentation, live.
-      - url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=Identify
-        status: 200
-        note: White Rose Research Online OAI-PMH; Identify returns repositoryName "White Rose Research Online".
-      - url: https://etheses.whiterose.ac.uk/cgi/oai2?verb=Identify
-        status: 200
-        note: White Rose eTheses Online OAI-PMH; Identify returns repositoryName "White Rose eTheses Online".
-      - url: https://github.com/SheffieldUni
-        status: 200
-        note: Official University of Sheffield GitHub org, ~19 public repos.
-      - url: https://twitter.com/sheffielduni
-        status: 200
-        note: Official X/Twitter account, live.
-      - url: https://www.linkedin.com/school/university-of-sheffield/
-        status: 999
-        note: LinkedIn school page; 999 is LinkedIn anti-bot response, URL pattern standard.
+- date: '2026-06-03'
+  rating: 2
+  summary: 'Verified live: the ORDA research data repository (orda.shef.ac.uk) and its OAI-PMH endpoint,
+    the figshare REST API used by ORDA, and both White Rose OAI-PMH endpoints (WRRO and WREO) which correctly
+    Identify as their respective repositories. The official SheffieldUni GitHub organization is live with
+    public IT/integration tooling. No general self-service developer portal or documented course/timetable/student-information
+    APIs were found; most institutional APIs are platform-provided (figshare, EPrints) rather than Sheffield-branded.
+    No endpoints were fabricated; the shibboleth host did not resolve and was excluded.'
+  endpoints:
+  - url: https://www.sheffield.ac.uk/
+    status: 200
+    note: Official university website, live.
+  - url: https://orda.shef.ac.uk/
+    status: 202
+    note: ORDA figshare research data repository (Cloudflare 202 challenge response).
+  - url: https://orda.shef.ac.uk/oai?verb=Identify
+    status: 202
+    note: ORDA OAI-PMH endpoint (behind Cloudflare challenge).
+  - url: https://api.figshare.com/v2/articles?page_size=1
+    status: 200
+    note: figshare REST API powering ORDA, responds to public article queries.
+  - url: https://docs.figshare.com/
+    status: 200
+    note: figshare API documentation, live.
+  - url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=Identify
+    status: 200
+    note: White Rose Research Online OAI-PMH; Identify returns repositoryName "White Rose Research Online".
+  - url: https://etheses.whiterose.ac.uk/cgi/oai2?verb=Identify
+    status: 200
+    note: White Rose eTheses Online OAI-PMH; Identify returns repositoryName "White Rose eTheses Online".
+  - url: https://github.com/SheffieldUni
+    status: 200
+    note: Official University of Sheffield GitHub org, ~19 public repos.
+  - url: https://twitter.com/sheffielduni
+    status: 200
+    note: Official X/Twitter account, live.
+  - url: https://www.linkedin.com/school/university-of-sheffield/
+    status: 999
+    note: LinkedIn school page; 999 is LinkedIn anti-bot response, URL pattern standard.
+- date: '2026-08-30'
+  rating: 3
+  summary: 'Re-profiled under the API Evangelist university pipeline with operator attribution settled
+    before anything was saved. Found and verified a genuine institution-operated API that the 2026-06-03
+    pass missed entirely: the Sheffield Solar API at api.solar.sheffield.ac.uk, which publishes its own
+    OpenAPI 3.1 document and answers keyless PV_Live requests. Also confirmed the institution''s own Shibboleth
+    SAML 2.0 identity provider serving live metadata from shef.ac.uk. Removed ten OpenAPI contracts and
+    forty-one derived artifacts that were figshare''s, not Sheffield''s — the source document declared
+    info.title ''Figshare API'' and servers https://api.figshare.com/v2. ORDA and both White Rose repositories
+    were kept and relabelled as tenant relationships rather than deleted. Probed api., data., shib. and
+    sso. subdomains for a course/timetable/open-data surface; none resolve. No endpoints were fabricated.'
+  endpoints:
+  - url: https://api.solar.sheffield.ac.uk/openapi.json
+    status: 200
+    note: 'First-party OpenAPI 3.1.0, title ''Sheffield Solar API'', 43 paths. x-operator: institution.'
+  - url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/0
+    status: 200
+    note: PV_Live GSP generation data, keyless, real JSON payload returned.
+  - url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/pes_list
+    status: 200
+    note: PES region list, keyless.
+  - url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/peakgeneration
+    status: 200
+    note: Peak GB solar generation record, keyless.
+  - url: https://api.solar.sheffield.ac.uk/pvlive_eu/api/v5/nuts_list
+    status: 200
+    note: PV_Live_EU NUTS region list, keyless.
+  - url: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
+    status: 401
+    note: 'Access boundary: ''Missing user identifier. Supply X-User-Id header.'' Header is NOT in the
+      published spec.'
+  - url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/notanumber
+    status: 422
+    note: FastAPI validation error envelope; recorded in errors/.
+  - url: https://api.solar.sheffield.ac.uk/health/ready
+    status: 404
+    note: Declared in the spec, nginx 404 at the public edge. Contract drift, recorded in lifecycle/.
+  - url: https://api.solar.sheffield.ac.uk/redoc
+    status: 200
+    note: Redoc rendering of the first-party contract.
+  - url: https://api.solar.sheffield.ac.uk/tandc
+    status: 200
+    note: Provider-published terms and conditions.
+  - url: https://api.solar.sheffield.ac.uk/pvlive/uptime
+    status: 200
+    note: Provider-published uptime page.
+  - url: https://www.solar.sheffield.ac.uk/api/
+    status: 200
+    note: PV_Live API user documentation, carrying an explicit no-stability-guarantee notice.
+  - url: https://idp.shef.ac.uk/idp/shibboleth
+    status: 200
+    note: 'Live SAML 2.0 metadata, entityID https://idp.shef.ac.uk/shibboleth. x-operator: institution.'
+  - url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0, repositoryName ''White Rose Research Online''. x-operator: tenant.'
+  - url: https://eprints.whiterose.ac.uk/cgi/oai2?verb=ListMetadataFormats
+    status: 200
+    note: Thirteen formats including oai_dc_orcid — ORCID conformance evidence.
+  - url: https://etheses.whiterose.ac.uk/cgi/oai2?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0, repositoryName ''White Rose eTheses Online''. x-operator: tenant.'
+  - url: https://orda.shef.ac.uk/oai?verb=Identify
+    status: 202
+    note: Live but behind a Cloudflare bot challenge; Identify unreadable to a scripted client. Blocked
+      on us, not a gap.
+  - url: https://api.datacite.org/clients/bl.shef
+    status: 200
+    note: DataCite client 'ORDA - The University of Sheffield Research Data Catalogue and Repository'.
+  - url: https://find.shef.ac.uk/
+    status: 200
+    note: Ex Libris Primo discovery on a Sheffield host. Vendor software, tenant deployment; no callable
+      contract found.
+  - url: https://docs.hpc.shef.ac.uk/en/latest/
+    status: 200
+    note: Institution-operated research computing documentation. No API contract published.
+  - url: https://api.sheffield.ac.uk/
+    status: 0
+    note: Does not resolve. No central API gateway.
+  - url: https://data.sheffield.ac.uk/
+    status: 0
+    note: Does not resolve. No open data portal.
+  - url: https://www.sheffield.ac.uk/llms.txt
+    status: 404
+    note: No llms.txt published.
+  - url: https://www.sheffield.ac.uk/.well-known/security.txt
+    status: 404
+    note: No security.txt published.
+  - url: https://students.sheffield.ac.uk/ai
+    status: 200
+    note: Redirects to CAS login; AI guidance is behind institutional SSO. No public AIPolicy pointer
+      recorded.
