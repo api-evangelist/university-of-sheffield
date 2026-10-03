@@ -346,6 +346,46 @@ paths:
       - User
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_handle_forgot_password_user_forgot_password_post:
+      properties:
+        email:
+          type: string
+          title: Email
+      type: object
+      required:
+      - email
+      title: Body_handle_forgot_password_user_forgot_password_post
+    Body_handle_verify_user_verify_post:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: Body_handle_verify_user_verify_post
+    Body_handle_reset_password_submission_user_reset_password_post:
+      properties:
+        token:
+          type: string
+          title: Token
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - token
+      - password
+      title: Body_handle_reset_password_submission_user_reset_password_post
     ValidationError:
       properties:
         loc:
@@ -372,24 +412,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Body_handle_forgot_password_user_forgot_password_post:
-      properties:
-        email:
-          type: string
-          title: Email
-      type: object
-      required:
-      - email
-      title: Body_handle_forgot_password_user_forgot_password_post
-    Body_handle_verify_user_verify_post:
-      properties:
-        token:
-          type: string
-          title: Token
-      type: object
-      required:
-      - token
-      title: Body_handle_verify_user_verify_post
     Body_handle_registration_user_register_post:
       properties:
         email:
@@ -469,28 +491,6 @@ components:
       - username
       - password
       title: Body_handle_login_user_login_post
-    Body_handle_reset_password_submission_user_reset_password_post:
-      properties:
-        token:
-          type: string
-          title: Token
-        password:
-          type: string
-          title: Password
-      type: object
-      required:
-      - token
-      - password
-      title: Body_handle_reset_password_submission_user_reset_password_post
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

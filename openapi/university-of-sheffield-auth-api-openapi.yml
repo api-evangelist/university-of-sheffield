@@ -196,6 +196,15 @@ paths:
       - APIKeyCookie: []
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Body_verify_verify_auth_verify_post:
       properties:
         token:
@@ -205,45 +214,6 @@ components:
       required:
       - token
       title: Body_verify_verify_auth_verify_post
-    Body_reset_reset_password_auth_reset_password_post:
-      properties:
-        token:
-          type: string
-          title: Token
-        password:
-          type: string
-          title: Password
-      type: object
-      required:
-      - token
-      - password
-      title: Body_reset_reset_password_auth_reset_password_post
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     UserRead:
       properties:
         id:
@@ -296,15 +266,6 @@ components:
       - email
       title: UserRead
       description: Schema returned for user reads.  Extends the base with SSF extras.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ErrorModel:
       properties:
         detail:
@@ -338,6 +299,45 @@ components:
       required:
       - email
       title: Body_reset_forgot_password_auth_forgot_password_post
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    Body_reset_reset_password_auth_reset_password_post:
+      properties:
+        token:
+          type: string
+          title: Token
+        password:
+          type: string
+          title: Password
+      type: object
+      required:
+      - token
+      - password
+      title: Body_reset_reset_password_auth_reset_password_post
     Body_auth_cookie_login_auth_cookie_login_post:
       properties:
         grant_type:
