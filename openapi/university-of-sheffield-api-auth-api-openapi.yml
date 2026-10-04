@@ -109,15 +109,119 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
+    ValidationError:
       properties:
-        detail:
+        loc:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Detail
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
-      title: HTTPValidationError
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UserRead:
+      properties:
+        id:
+          type: integer
+          title: Id
+        email:
+          type: string
+          format: email
+          title: Email
+        is_active:
+          type: boolean
+          title: Is Active
+          default: true
+        is_superuser:
+          type: boolean
+          title: Is Superuser
+          default: false
+        is_verified:
+          type: boolean
+          title: Is Verified
+          default: false
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone
+        company:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Company
+        tandc:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Tandc
+      type: object
+      required:
+      - id
+      - email
+      title: UserRead
+      description: Schema returned for user reads.  Extends the base with SSF extras.
+    Body_auth_jwt_login_auth_jwt_login_post:
+      properties:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          format: password
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          format: password
+          title: Client Secret
+      type: object
+      required:
+      - username
+      - password
+      title: Body_auth_jwt_login_auth_jwt_login_post
     UserCreate:
       properties:
         email:
@@ -178,58 +282,15 @@ components:
       - last_name
       title: UserCreate
       description: Schema for new user registration.
-    UserRead:
+    HTTPValidationError:
       properties:
-        id:
-          type: integer
-          title: Id
-        email:
-          type: string
-          format: email
-          title: Email
-        is_active:
-          type: boolean
-          title: Is Active
-          default: true
-        is_superuser:
-          type: boolean
-          title: Is Superuser
-          default: false
-        is_verified:
-          type: boolean
-          title: Is Verified
-          default: false
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        phone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone
-        company:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Company
-        tandc:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Tandc
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - id
-      - email
-      title: UserRead
-      description: Schema returned for user reads.  Extends the base with SSF extras.
+      title: HTTPValidationError
     ErrorModel:
       properties:
         detail:
@@ -243,41 +304,6 @@ components:
       required:
       - detail
       title: ErrorModel
-    Body_auth_jwt_login_auth_jwt_login_post:
-      properties:
-        grant_type:
-          anyOf:
-          - type: string
-            pattern: ^password$
-          - type: 'null'
-          title: Grant Type
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          format: password
-          title: Password
-        scope:
-          type: string
-          title: Scope
-          default: ''
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          format: password
-          title: Client Secret
-      type: object
-      required:
-      - username
-      - password
-      title: Body_auth_jwt_login_auth_jwt_login_post
     BearerResponse:
       properties:
         access_token:
@@ -291,32 +317,6 @@ components:
       - access_token
       - token_type
       title: BearerResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

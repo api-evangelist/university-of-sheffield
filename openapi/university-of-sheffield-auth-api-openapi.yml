@@ -196,24 +196,67 @@ paths:
       - APIKeyCookie: []
 components:
   schemas:
-    HTTPValidationError:
+    Body_auth_cookie_login_auth_cookie_login_post:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_verify_verify_auth_verify_post:
-      properties:
-        token:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
           type: string
-          title: Token
+          title: Username
+        password:
+          type: string
+          format: password
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          format: password
+          title: Client Secret
       type: object
       required:
-      - token
-      title: Body_verify_verify_auth_verify_post
+      - username
+      - password
+      title: Body_auth_cookie_login_auth_cookie_login_post
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     UserRead:
       properties:
         id:
@@ -266,19 +309,6 @@ components:
       - email
       title: UserRead
       description: Schema returned for user reads.  Extends the base with SSF extras.
-    ErrorModel:
-      properties:
-        detail:
-          anyOf:
-          - type: string
-          - additionalProperties:
-              type: string
-            type: object
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: ErrorModel
     Body_verify_request_token_auth_request_verify_token_post:
       properties:
         email:
@@ -289,42 +319,15 @@ components:
       required:
       - email
       title: Body_verify_request_token_auth_request_verify_token_post
-    Body_reset_forgot_password_auth_forgot_password_post:
+    HTTPValidationError:
       properties:
-        email:
-          type: string
-          format: email
-          title: Email
-      type: object
-      required:
-      - email
-      title: Body_reset_forgot_password_auth_forgot_password_post
-    ValidationError:
-      properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: HTTPValidationError
     Body_reset_reset_password_auth_reset_password_post:
       properties:
         token:
@@ -338,41 +341,38 @@ components:
       - token
       - password
       title: Body_reset_reset_password_auth_reset_password_post
-    Body_auth_cookie_login_auth_cookie_login_post:
+    ErrorModel:
       properties:
-        grant_type:
+        detail:
           anyOf:
           - type: string
-            pattern: ^password$
-          - type: 'null'
-          title: Grant Type
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          format: password
-          title: Password
-        scope:
-          type: string
-          title: Scope
-          default: ''
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          format: password
-          title: Client Secret
+          - additionalProperties:
+              type: string
+            type: object
+          title: Detail
       type: object
       required:
-      - username
-      - password
-      title: Body_auth_cookie_login_auth_cookie_login_post
+      - detail
+      title: ErrorModel
+    Body_reset_forgot_password_auth_forgot_password_post:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+      type: object
+      required:
+      - email
+      title: Body_reset_forgot_password_auth_forgot_password_post
+    Body_verify_verify_auth_verify_post:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: Body_verify_verify_auth_verify_post
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
