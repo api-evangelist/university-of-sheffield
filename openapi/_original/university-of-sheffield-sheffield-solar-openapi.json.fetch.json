@@ -1,0 +1,12 @@
+{
+ "url": "https://api.solar.sheffield.ac.uk/openapi.json",
+ "requested_url": "https://api.solar.sheffield.ac.uk/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 56713,
+ "sha256": "9190d9a28dc9f7ccd3729311dcab0497bdf829c3893424f6ecc1383e3d4872e9",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
