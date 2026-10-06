@@ -38,7 +38,7 @@ tags:
   - Energy Data
   - Research Computing
 created: '2026-06-03'
-modified: '2026-08-30'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 deliveryModel:
   model: self-hosted
@@ -775,6 +775,8 @@ apis:
   - type: OAuthScopes
     url: scopes/university-of-sheffield-scopes.yml
 common:
+  - url: https://sheffield.ac.uk/news
+    type: Blog
   - type: License
     name: GPL-3.0
     url: https://github.com/SheffieldSolar/PV_Live-API/blob/main/LICENSE
