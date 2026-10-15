@@ -1,35 +1,61 @@
----
-generated: '2026-08-30'
-method: derived
-source: openapi/university-of-sheffield-sheffield-solar-api-openapi.yml
-provider: University of Sheffield
-x-operator: institution
-description: >-
-  The University of Sheffield's own Sheffield Solar API declares an OAuth2 password
-  flow but publishes an EMPTY scopes object — there is no scope vocabulary to record.
-  Authorization is coarse: an operation is either open, or it requires an
-  authenticated user, or it requires an administrator. This file records that
-  absence rather than inventing scopes to fill it.
+generated: '2026-10-14'
+method: none
+source: openapi/university-of-sheffield-admin-api-openapi.yml, openapi/university-of-sheffield-api-auth-api-openapi.yml,
+  openapi/university-of-sheffield-auth-api-openapi.yml, openapi/university-of-sheffield-health-api-openapi.yml,
+  openapi/university-of-sheffield-metrics-api-openapi.yml, openapi/university-of-sheffield-pvforecast-api-openapi.yml,
+  openapi/university-of-sheffield-pvlive-api-openapi.yml, openapi/university-of-sheffield-pvlive-eu-api-openapi.yml,
+  openapi/university-of-sheffield-user-api-openapi.yml, openapi/university-of-sheffield-users-api-openapi.yml
 schemes:
-  - name: OAuth2PasswordBearer
-    flows:
-      - flow: password
-        tokenUrl: https://api.solar.sheffield.ac.uk/auth/jwt/login
-        scopes_declared: 0
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-admin-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-api-auth-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-auth-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-health-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-metrics-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-pvforecast-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-pvlive-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-pvlive-eu-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-user-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
+- name: OAuth2PasswordBearer
+  source: openapi/university-of-sheffield-users-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: /auth/jwt/login
 scopes: []
-coarse_authorization_tiers:
-  - tier: open
-    description: No credential. PV_Live and PV_Live_EU read endpoints, and the gsp/pes/nuts lists.
-    evidence:
-      url: https://api.solar.sheffield.ac.uk/pvlive/api/v4/gsp/0
-      status: 200
-  - tier: registered-user
-    description: Requires a registered identifier (X-User-Id header) or a JWT. PV_Forecast endpoints, /users/me.
-    evidence:
-      url: https://api.solar.sheffield.ac.uk/pvforecast/api/v4/gsp/0
-      status: 401
-  - tier: administrator
-    description: The /admin operations, which issue and revoke user tokens.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+note: The OAuth2 security scheme(s) in the OpenAPI declare no scopes, and no security requirement
+  references one.
