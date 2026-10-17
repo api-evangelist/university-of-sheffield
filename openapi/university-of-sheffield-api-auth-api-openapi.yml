@@ -109,6 +109,19 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    BearerResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          title: Token Type
+      type: object
+      required:
+      - access_token
+      - token_type
+      title: BearerResponse
     ValidationError:
       properties:
         loc:
@@ -135,6 +148,19 @@ components:
       - msg
       - type
       title: ValidationError
+    ErrorModel:
+      properties:
+        detail:
+          anyOf:
+          - type: string
+          - additionalProperties:
+              type: string
+            type: object
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: ErrorModel
     UserRead:
       properties:
         id:
@@ -187,41 +213,6 @@ components:
       - email
       title: UserRead
       description: Schema returned for user reads.  Extends the base with SSF extras.
-    Body_auth_jwt_login_auth_jwt_login_post:
-      properties:
-        grant_type:
-          anyOf:
-          - type: string
-            pattern: ^password$
-          - type: 'null'
-          title: Grant Type
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          format: password
-          title: Password
-        scope:
-          type: string
-          title: Scope
-          default: ''
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          format: password
-          title: Client Secret
-      type: object
-      required:
-      - username
-      - password
-      title: Body_auth_jwt_login_auth_jwt_login_post
     UserCreate:
       properties:
         email:
@@ -282,6 +273,41 @@ components:
       - last_name
       title: UserCreate
       description: Schema for new user registration.
+    Body_auth_jwt_login_auth_jwt_login_post:
+      properties:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          format: password
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          format: password
+          title: Client Secret
+      type: object
+      required:
+      - username
+      - password
+      title: Body_auth_jwt_login_auth_jwt_login_post
     HTTPValidationError:
       properties:
         detail:
@@ -291,32 +317,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ErrorModel:
-      properties:
-        detail:
-          anyOf:
-          - type: string
-          - additionalProperties:
-              type: string
-            type: object
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: ErrorModel
-    BearerResponse:
-      properties:
-        access_token:
-          type: string
-          title: Access Token
-        token_type:
-          type: string
-          title: Token Type
-      type: object
-      required:
-      - access_token
-      - token_type
-      title: BearerResponse
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -219,6 +219,19 @@ components:
       - msg
       - type
       title: ValidationError
+    ErrorModel:
+      properties:
+        detail:
+          anyOf:
+          - type: string
+          - additionalProperties:
+              type: string
+            type: object
+          title: Detail
+      type: object
+      required:
+      - detail
+      title: ErrorModel
     UserRead:
       properties:
         id:
@@ -280,19 +293,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ErrorModel:
-      properties:
-        detail:
-          anyOf:
-          - type: string
-          - additionalProperties:
-              type: string
-            type: object
-          title: Detail
-      type: object
-      required:
-      - detail
-      title: ErrorModel
     UserUpdate:
       properties:
         password:

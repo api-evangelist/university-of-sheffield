@@ -346,6 +346,49 @@ paths:
       - User
 components:
   schemas:
+    Body_handle_login_user_login_post:
+      properties:
+        grant_type:
+          anyOf:
+          - type: string
+            pattern: ^password$
+          - type: 'null'
+          title: Grant Type
+        username:
+          type: string
+          title: Username
+        password:
+          type: string
+          format: password
+          title: Password
+        scope:
+          type: string
+          title: Scope
+          default: ''
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          format: password
+          title: Client Secret
+        g-recaptcha-response:
+          type: string
+          title: G-Recaptcha-Response
+          default: ''
+        captcha-version:
+          type: string
+          title: Captcha-Version
+          default: v3
+      type: object
+      required:
+      - username
+      - password
+      title: Body_handle_login_user_login_post
     Body_handle_registration_user_register_post:
       properties:
         email:
@@ -408,15 +451,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Body_handle_verify_user_verify_post:
-      properties:
-        token:
-          type: string
-          title: Token
-      type: object
-      required:
-      - token
-      title: Body_handle_verify_user_verify_post
     HTTPValidationError:
       properties:
         detail:
@@ -426,6 +460,15 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Body_handle_verify_user_verify_post:
+      properties:
+        token:
+          type: string
+          title: Token
+      type: object
+      required:
+      - token
+      title: Body_handle_verify_user_verify_post
     Body_handle_reset_password_submission_user_reset_password_post:
       properties:
         token:
@@ -448,49 +491,6 @@ components:
       required:
       - email
       title: Body_handle_forgot_password_user_forgot_password_post
-    Body_handle_login_user_login_post:
-      properties:
-        grant_type:
-          anyOf:
-          - type: string
-            pattern: ^password$
-          - type: 'null'
-          title: Grant Type
-        username:
-          type: string
-          title: Username
-        password:
-          type: string
-          format: password
-          title: Password
-        scope:
-          type: string
-          title: Scope
-          default: ''
-        client_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client Id
-        client_secret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          format: password
-          title: Client Secret
-        g-recaptcha-response:
-          type: string
-          title: G-Recaptcha-Response
-          default: ''
-        captcha-version:
-          type: string
-          title: Captcha-Version
-          default: v3
-      type: object
-      required:
-      - username
-      - password
-      title: Body_handle_login_user_login_post
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
