@@ -331,3 +331,9 @@ components:
     HTTPBasic:
       type: http
       scheme: basic
+x-provenance:
+  method: harvested
+  publisher: University of Sheffield
+  source: https://api.solar.sheffield.ac.uk/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
